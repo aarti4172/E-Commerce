@@ -70,6 +70,7 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	//Not working. Using findAll() will call both customers and merchants. But we want the list of merchants only
+	//One possible solution-> create separate repositories for merchant as well as customers
 	@Override
 	public List<MerchantDetails> getAllMerchants() {
 		return  null;
@@ -116,7 +117,7 @@ public class AdminDaoImpl implements AdminDao{
 		Iterator<Product> i = products.iterator();
 		while(i.hasNext()) {
 			Product pr= (Product)i.next();
-			if(pr.isFeatured()==false) {
+			if(pr.isFeatured()==false) {  
 				i.remove();
 			}
 		}
