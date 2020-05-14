@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="merchant")
+@Table(name="merchant_details")
 public class Merchant {
 
 	@Id
@@ -19,11 +19,11 @@ public class Merchant {
 	
 	private String name;
 	
-    private String phone_no;
+        private String phone_no;
 	
 	private String altPhone_no;
 	
-   private String email;
+   	private String email;
 	
 	private Set<Order> orders;
 	
@@ -33,11 +33,11 @@ public class Merchant {
 	
 	private Set<Product> products;
 	
-    private Set<CommonFeedback> feedbacks;
+    	private Set<CommonFeedback> feedbacks;
     
-    private boolean isApproved;
+    	private boolean isApproved;
     
-    private int rating;
+    	private int rating;
 
 	public Merchant(int merchant_id, String username, String name, String phone_no, String altPhone_no, String email,
 			Set<Order> orders, Set<Address> addresses, Set<Coupons> coupons, Set<Product> products,
