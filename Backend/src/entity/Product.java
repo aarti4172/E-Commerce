@@ -33,8 +33,8 @@ public class Product {
 
 	public Product(int productId, String productName, String productImage, double productPrice, int productRating,
 			int noOfProductsViewed, String productBrand, int noOfProducts, String productInfo, String productCategory,
-			double productDiscount, boolean productActivated, boolean status, boolean featured, int productMerchantId /*,
-			Set<ProductFeedBack> feedbacks*/) {
+			double productDiscount, boolean productActivated, boolean status, boolean featured, int productMerchantId,
+			Set<ProductFeedBack> feedbacks) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -51,7 +51,7 @@ public class Product {
 		this.status = status;
 		this.featured = featured;
 		this.productMerchantId = productMerchantId;
-		//this.feedbacks = feedbacks;
+		this.feedbacks = feedbacks;
 	}
 
 	public int getProductId() {
@@ -174,12 +174,12 @@ public class Product {
 		this.productMerchantId = productMerchantId;
 	}
 
-	/*public Set<ProductFeedBack> getFeedbacks() {
+	public Set<ProductFeedBack> getFeedbacks() {
 		return feedbacks;
 	}
 
 	public void setFeedbacks(Set<ProductFeedBack> feedbacks) {
 		this.feedbacks = feedbacks;
-	}*/
+	}
 	
 }
