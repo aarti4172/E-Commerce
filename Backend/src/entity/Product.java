@@ -1,6 +1,6 @@
 package com.store.entity;
 
-//import java.util.*;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -25,11 +25,10 @@ public class Product {
 	private boolean status;
 	private boolean featured;
 	private int productMerchantId;
-	//Set<ProductFeedBack> feedbacks = new HashSet<>();
+	Set<ProductFeedBack> feedbacks;
 	
 	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
+		feedbacks =  = new HashSet<>();
 	}
 
 	public Product(int productId, String productName, String productImage, double productPrice, int productRating,
