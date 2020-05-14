@@ -8,15 +8,16 @@ import com.example.main.model.Inventory;
 import com.example.main.model.MerchantDetails;
 import com.example.main.model.Product;
 import com.example.main.model.ProductFeedback;
+import com.example.main.model.User;
 
 public interface AdminDao {
 	
 	//add,remove,view merchants using merchantrepository
-	void removeMerchant(MerchantDetails merchant);
+	void removeMerchantById(int userId);
 	MerchantDetails addMerchant(MerchantDetails merchant);
 	MerchantDetails findMerchantById(int userId);
 	MerchantDetails findMerchantByName(String name);
-	List<MerchantDetails> getAllMerchants();
+	List<MerchantDetails> getAllMerchants();//NotWorking
 	
 	
 	//search, view using inventory repository9name, category, type
@@ -31,18 +32,18 @@ public interface AdminDao {
 	
 	
 	//add, remove, view customers using customerrepository
-	void removeCustomer(CustomerDetails customer);
+	void removeCustomerById(int userId);
 	CustomerDetails addCustomer(CustomerDetails customer);
 	CustomerDetails findCustomerById(int userId);
 	CustomerDetails findCustomerByName(String name);
-	List<CustomerDetails> getAllCustomers();
+	List<CustomerDetails> getAllCustomers();//NotWorking
 	
 	
 	//Common feedbacks
 	CommonFeedback addCommonFeedback(CommonFeedback cfd);
 	void removeCommonFeedbackById(int feedbackId);
 	void removeCommonFeedbackByUserId(int userId);
-	List<CommonFeedback> getAllCommonFeedbackByUserId(int userId);
+	List<CommonFeedback> getAllCommonFeedbackByUserId(int userId);//LogicNotWritten
 	CommonFeedback getCommonFeedbackById(int feedbackId);
 	
 	
@@ -50,9 +51,10 @@ public interface AdminDao {
 	ProductFeedback addCommonFeedback(ProductFeedback cfd);
 	void removeProductFeedbackkById(int feedbackId);
 	void removeProductFeedbackByUserId(int userId);
-	List<ProductFeedback> getAllProductFeedbackByUserId(int userId);
+	List<ProductFeedback> getAllProductFeedbackByUserId(int userId);//LogicNotWritten
 	ProductFeedback getProductFeedbackById(int feedbackId);
 	List<ProductFeedback> getProductFeedbackByProductId(int productId);
+	
 	
 	
 	//coupons , discounts, promos, 
