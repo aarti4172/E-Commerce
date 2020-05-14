@@ -1,30 +1,43 @@
-package com.store.entity;
+package com.capstore.app.models;
 
-import java.util.*;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="Inventory")
+@Table(name = "inventory")
 public class Inventory {
 
-	private Set<Product> products;
-
+	@Id
+	@Column(name = "inventory_id")
+	private int invertoryId;
+	@ElementCollection
+	private List<Integer> merchantId;
+	@ElementCollection
+	private List<Integer> product_id;
+	public int getInvertoryId() {
+		return invertoryId;
+	}
+	public void setInvertoryId(int invertoryId) {
+		this.invertoryId = invertoryId;
+	}
+	
+	public List<Integer> getMerchantId() {
+		return merchantId;
+	}
+	public void setMerchantId(List<Integer> merchantId) {
+		this.merchantId = merchantId;
+	}
+	public List<Integer> getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(List<Integer> product_id) {
+		this.product_id = product_id;
+	}
 	public Inventory() {
-		products = new HashSet<Product>();
 	}
-
-	public Inventory(Set<Product> products) {
-		super();
-		this.products = products;
-	}
-
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-		
 }
