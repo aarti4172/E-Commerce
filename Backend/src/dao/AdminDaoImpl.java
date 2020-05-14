@@ -69,7 +69,7 @@ public class AdminDaoImpl implements AdminDao{
 		return (MerchantDetails) userRepository.findByName(name);
 	}
 
-	//Not working. Using findAll() will call both customers and merchants. 
+	//Not working. Using findAll() will call both customers and merchants. But we want the list of merchants only
 	@Override
 	public List<MerchantDetails> getAllMerchants() {
 		return  null;
@@ -145,7 +145,8 @@ public class AdminDaoImpl implements AdminDao{
 		return (CustomerDetails) userRepository.findByName(name);
 	}
 
-	// Not working:------
+	// Not working:------> Same problem as with the Merchant class. Using findAll() will call both customers and merchants.
+	//But we want the list of customers only
 	@Override
 	public List<CustomerDetails> getAllCustomers() {
 		return null;
@@ -170,7 +171,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 	}
 
-	
+	//Logic not written: 
 	@Override
 	public List<CommonFeedback> getAllCommonFeedbackByUserId(int userId) {
 		return null;
@@ -201,7 +202,7 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 
-    @Override
+        @Override
 	public List<ProductFeedback> getAllProductFeedbackByUserId(int userId) {
 		return null;
 	}
