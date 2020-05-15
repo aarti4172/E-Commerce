@@ -16,24 +16,24 @@ import com.example.main.model.Product;
 import com.example.main.model.ProductFeedback;
 import com.example.main.model.User;
 import com.example.main.repository.CommonFeedbackRepository;
+import com.example.main.repository.CustomerRepository;
 import com.example.main.repository.InventoryRepository;
+import com.example.main.repository.MerchantRepository;
 import com.example.main.repository.ProductFeedbackRepository;
 import com.example.main.repository.ProductRepository;
-//import com.example.main.repository.MerchantRepository;
-import com.example.main.repository.UserRepository;
+
 
 
 @Component("AdminComponent")
 public class AdminDaoImpl implements AdminDao{
 
-	/*
+	
 	@Autowired
 	@Qualifier(value="MerchantRepository")
 	private MerchantRepository merchantRepository;
-	*/
 	@Autowired
-	@Qualifier(value="UserRepository")
-	private UserRepository userRepository;
+	@Qualifier(value="CustomerRepository")
+	private CustomerRepository customerRepository;
 	@Autowired
 	@Qualifier(value="InventoryRepository")
 	private InventoryRepository inventoryRepository;
@@ -49,31 +49,30 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public void removeMerchantById(int userId) {
-		userRepository.deleteById(userId);
+		merchantRepository.deleteById(userId);
 		
 	}
 
 	@Override
 	public MerchantDetails addMerchant(MerchantDetails merchant) {
-		userRepository.save(merchant);
+		merchantRepository.save(merchant);
 		return merchant;
 	}
 
 	@Override
 	public MerchantDetails findMerchantById(int userId) {
-		return (MerchantDetails) userRepository.findById(userId).get();
+		return merchantRepository.findById(userId).get();
 	}
 
 	@Override
 	public MerchantDetails findMerchantByName(String name) {
-		return (MerchantDetails) userRepository.findByName(name);
+		return merchantRepository.findByName(name);
 	}
 
-	//Not working. Using findAll() will call both customers and merchants. But we want the list of merchants only
-	//One possible solution-> create separate repositories for merchant as well as customers
+	
 	@Override
 	public List<MerchantDetails> getAllMerchants() {
-		return  null;
+		return  merchantRepository.findAll();
 	}
 
 	@Override
@@ -88,27 +87,27 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public List<Product> getProductsbyInventoryId(int invertoryId) {
-		return productRepository.findByInventoryId();
+		return productRepository.findByInventoryId(invertoryId);
 	}
 
 	@Override
 	public Product getProductByProductId(int productId) {
-		return productRepository.findByProductId();
+		return productRepository.findByProductId(productId);
 	}
 
 	@Override
 	public List<Product> getProductsByCategory(String productCategory) {
-		return productRepository.findByProductCategory();
+		return productRepository.findByProductCategory(productCategory);
 	}
 
 	@Override
 	public List<Product> getProductsByBrand(String productBrand) {
-		return productRepository.findByProductBrand();
+		return productRepository.findByProductBrand(productBrand);
 	}
 
 	@Override
 	public List<Product> getProductsByType(String productInfo) {
-		return productRepository.findByProductInfo();
+		return productRepository.findByProductInfo(productInfo);
 	}
 
 	@Override
@@ -117,7 +116,7 @@ public class AdminDaoImpl implements AdminDao{
 		Iterator<Product> i = products.iterator();
 		while(i.hasNext()) {
 			Product pr= (Product)i.next();
-			if(pr.isFeatured()==false) {  
+			if(pr.isFeatured()==false) {
 				i.remove();
 			}
 		}
@@ -127,30 +126,29 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public void removeCustomerById(int userId) {
-		userRepository.deleteById(userId);
+		customerRepository.deleteById(userId);
 	}
 
 	@Override
 	public CustomerDetails addCustomer(CustomerDetails customer) {
-		userRepository.save(customer);
+		customerRepository.save(customer);
 		return customer;
 	}
 
 	@Override
 	public CustomerDetails findCustomerById(int userId) {
-		return (CustomerDetails) userRepository.findById(userId).get();
+		return customerRepository.findById(userId).get();
 	}
 
 	@Override
 	public CustomerDetails findCustomerByName(String name) {
-		return (CustomerDetails) userRepository.findByName(name);
+		return customerRepository.findByName(name);
 	}
 
-	// Not working:------> Same problem as with the Merchant class. Using findAll() will call both customers and merchants.
-	//But we want the list of customers only
+	
 	@Override
 	public List<CustomerDetails> getAllCustomers() {
-		return null;
+		return customerRepository.findAll();
 	}
 
 
@@ -172,7 +170,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 	}
 
-	//Logic not written: 
+	//not working------
 	@Override
 	public List<CommonFeedback> getAllCommonFeedbackByUserId(int userId) {
 		return null;
@@ -202,8 +200,8 @@ public class AdminDaoImpl implements AdminDao{
 		
 	}
 
-
-        @Override
+//not working
+    @Override
 	public List<ProductFeedback> getAllProductFeedbackByUserId(int userId) {
 		return null;
 	}
@@ -221,3 +219,4 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 }
+
