@@ -5,48 +5,56 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.store.dao.MerchantDAO;
-import com.store.entity.Merchant;
+import com.capgemini.dao.AdminDao;
+import com.capgemini.dao.MerchantRepository;
+import com.capgemini.entity.MerchantDetails;
 
 
 @Service
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired
-	private MerchantDAO merchantRepo;
+	private MerchantRepository merchantRepo;
 	
 	@Autowired
-	private Merchant merchant;
+	private MerchantDetails merchant;
+	
+	@Autowired
+	private AdminDao admindao;
+	
 	
 	@Override
-	public void addMerchant(Merchant m) {
+	public void addMerchant(MerchantDetails m) {
 		// TODO Auto-generated method stub
-		merchantRepo.save(m);
+		//merchantRepo.save(m);
+		admindao.addMerchant(m);
 		
 	}
 
 	@Override
-	public void removeMerchant(Merchant m) {
+	public void removeMerchant(MerchantDetails m) {
 		// TODO Auto-generated method stub
+		//admindao.removeMerchantById(userId);
 		merchantRepo.delete(m);
 	}
 
 	@Override
-	public List<Merchant> getAllMerchant() {
+	public List<MerchantDetails> getAllMerchant() {
 		// TODO Auto-generated method stub
 		return merchantRepo.findAll();
 	}
 
 	@Override
-	public void updateMerchant(Merchant m) {
+	public void updateMerchant(MerchantDetails m) {
 		// TODO Auto-generated method stub
 		merchantRepo.save(m);
 		
 	}
 
 	@Override
-	public Merchant findMerchantById(Integer id) {
+	public MerchantDetails findMerchantById(Integer id) {
 		// TODO Auto-generated method stub
+		admindao.findMerchantById(id);
 		return merchantRepo.findById(id).get();
 	}
 
