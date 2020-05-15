@@ -2,15 +2,16 @@ package com.store.service;
 
 import java.util.List;
 
-import com.store.entity.Merchant;
+import com.capgemini.entity.MerchantDetails;
 
 
 public interface AdminService {
 
 	
-	public void addMerchant(Merchant m);
-	public void removeMerchant(Merchant m);
-	public List<Merchant> getAllMerchant();
-	public void updateMerchant(Merchant m);
-	public Merchant findMerchantById(Integer id);
+	public void addMerchant(MerchantDetails m);
+	public void removeMerchant(MerchantDetails m);
+	public List<MerchantDetails> getAllMerchant();
+	public void updateMerchant(MerchantDetails m);
+	public MerchantDetails findMerchantById(Integer id);
 }
+
