@@ -17,18 +17,37 @@ export class AddMerchantComponent implements OnInit {
   PhoneNo : String;
   Alternate_phone_no : String;
   Alternate_email: String;
-  
+  check=false;
+  status: string;
+  Rating:number;
+  isApproved;
 
   constructor( private adminService: AdminServiceService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   addMerchant()
   {
-   this.adminService.addNewMerchant(this.merchant).subscribe( data=>{
-    console.log(data);}
+    console.log(this.merchant);
+   this.adminService.addNewMerchant(this.merchant);
    
-  )
+  
    }
+
+   onCheckboxValueChange():any{
+    this.check=!this.check
+    if(this.check){
+    this.status="Approved";
+    alert(this.status)
+    }
+    else{
+    this.status="Disapproved";
+    alert(this.status)
+    }
+    this.isApproved=this.check;
+
+
+  }
 }

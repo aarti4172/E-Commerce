@@ -1,0 +1,41 @@
+
+<div class="container">
+<h1 style="font-family: 'Gill Sans';text-align: center;"> MERCHANTS LIST</h1>
+<div style = "text-align: right;">
+    <button type="button" class="btn btn-success" (click)="addmerchant()">Add Merchant</button>
+</div>
+<br>
+<input type="number" />&nbsp;&nbsp;
+<button type="button" class="btn btn-secondary" >Search</button> <br>
+    <table class="table table-striped table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Merchant Id</th>
+            <th>Merchant Name</th>
+            <th>Merchant Phone no</th>
+            <th>Alternate Phone no</th>
+            <th>EmailId</th>
+            <th>Rating</th>
+
+
+        </tr>
+      </thead>
+      <tr *ngFor="let m of merchantList; let i = index ">
+        <td>{{m.merchant_Id}}</td>
+        <td>{{m.Name}}</td>
+        <td>{{m.PhoneNo}}</td>
+        <td>{{m.Alternate_phone_no}}</td>
+        <td>{{m.alternate_email}}</td>
+        <td>{{m.Rating}}</td>
+        <td> <button type="submit" class="btn btn-primary" (click)="delete(m.merchant_Id)">Delete Account</button></td>
+                    
+
+
+    </tr>
+
+</table>
+<button type="submit" class="btn btn-info" (click)="back()">Return</button>
+
+
+                  
+</div>
