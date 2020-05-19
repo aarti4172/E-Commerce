@@ -1,82 +1,118 @@
-package com.example.main.controller;
+package com.capstore.app.controller;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.main.dao.AdminDao;
-import com.example.main.model.CustomerDetails;
-import com.example.main.model.MerchantDetails;
-import com.example.main.model.ValidationToken;
-import com.example.main.repository.ValidationTokenRepository;
-import com.example.main.service.EmailService;
+import com.capstore.app.models.CustomerDetails;
+import com.capstore.app.models.MerchantDetails;
+import com.capstore.app.models.Product;
+import com.capstore.app.service.AdminServiceInteface;
 
-@RestController("AdminController")
-@RequestMapping(value="",method= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
+
+
+@CrossOrigin(origins ="http://localhost:4200")
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
-	private AdminDao adminDao;
-	@Autowired
-	private EmailService emailService;
-	@Autowired
-	private ValidationTokenRepository validationTokenRepository;
+	AdminServiceInteface AdminService;
 	
-	private Logger logger=  LoggerFactory.getLogger(AdminController.class);
-	
-	@PostMapping(path="/addMerchant")
-	public String addMerchant(@RequestBody(required = false) MerchantDetails merchant) {
-		merchant.setActive(true);
-		merchant.setUserId(123456);
-		adminDao.addMerchant(merchant);
-		return "merchant added";
+	@RequestMapping(value="/hello")
+	public String sayHello() {
+		return "Hello World! from Capstore Spring Framework!";
 	}
 	
-	@PostMapping(path="/addCustomer")
-	public String addCustomer(@RequestBody(required = false) CustomerDetails customer) {
-		String string="";
-		customer.setActive(false);
-		customer.seteMail("khushi13ambastha@gmail.com");
-		if(adminDao.existingCustomerByEmail(customer.geteMail())==false) {
-			adminDao.addCustomer(customer);
-			try {
-				emailService.sendVerificationMail(customer);
-			}catch(MailException ex) {
-				logger.info("Error sending email: " + ex.getMessage());
+	//Add Customer
+	@PostMapping("/customer")
+	public CustomerDetails insertCustomer(@RequestBody CustomerDetails cust)
+	{
+		CustomerDetails cust1=AdminService.addCustomer(cust);
+		return cust1;
+		
+	}
+	//Get All Customers
+	 @GetMapping("/customer")
+	public ResponseEntity<List<CustomerDetails>> getAllCustomers()
+	   {
+			List<CustomerDetails> customers= AdminService.getAllCustomers();
+			System.out.println("In Get All Customers");
+			System.out.println(customers);
+			if(customers.isEmpty()) {
+				return new ResponseEntity("Sorry! No Customer Found!", HttpStatus.NOT_FOUND);
 			}
-			string="customer added";
+			
+			return new ResponseEntity<List<CustomerDetails>>(customers, HttpStatus.OK);
 		}
-		else string="Email already exists!";
+	 
+	 //Delete Customer
+	 @DeleteMapping("/customer/{userId}")
+		public  void deleteCustomer(@PathVariable("userId")int userId) 
+	    {
+			
+		 AdminService.removeCustomerById(userId);
+	//	 walletService.deleteCustomer(custId);
 		
-		return string;
-	}
-	
-	@PostMapping(path="/confirm-account")
-	public String confirmUserAccount(String string, @RequestParam("token")String tokenValue) {
-		
-		ValidationToken token = validationTokenRepository.findByTokenValue(tokenValue);
-		if(token !=null) {
-			CustomerDetails customer= adminDao.
-					findCustomerByEMailIgnoreCase(token.getUser().geteMail());
-			customer.setActive(true);
-			emailService.sendWelcomeMail(customer);
-			adminDao.addCustomer(customer);
-			string= "Account verified";
+			
 		}
-		else {
-			string="Account not verified. This link is invalid or broken.";
+	//Update Customer
+	 
+	 
+	 //Add Merchnat
+	 @PostMapping("/merchant")
+		public MerchantDetails addMerchant(@RequestBody MerchantDetails merchant)
+		{
+		 MerchantDetails merchant1=AdminService.addMerchant(merchant);
+			return merchant1;
+			
 		}
-		return string;
+	 
+	 //Get All Merchant
+	 @GetMapping("/merchant")
+	 public ResponseEntity<List<MerchantDetails>> getAllMerchants(){
+		List<MerchantDetails> merchants= AdminService.getAllMerchants();
+			if(merchants.isEmpty()) {
+			return new ResponseEntity("Sorry! No Merchant Found!", HttpStatus.NOT_FOUND);
+		}
+				
+			return new ResponseEntity<List<MerchantDetails>>(merchants, HttpStatus.OK);		
+		}
+	 // Delete Merchant
+	 
+	 @DeleteMapping("/merchant/{MerchnatId}")
+	public  Map<String, Boolean> deleteMerchant(@PathVariable("MerchnatId")int MerchnatId) 
+	    {
+			
+		 
+		 AdminService.removeMerchantById(MerchnatId);
 		
-	}
-	
-
+		
+			Map<String, Boolean> response = new HashMap<>();
+			response.put("deleted", Boolean.TRUE);
+			return response;
+		}
+	 //Get all Products
+	 @RequestMapping("products")
+		public List<Product> getAllProducts(){
+		 List<Product> products=AdminService.getAllProducts();
+			return products;
+		}
+	 @DeleteMapping("products/{ProductID}")
+	 public boolean DeleteProduct(@PathVariable("ProductID")int productID)
+	 {
+		 return AdminService.removeProductbyId(productID);
+	 }
+	 
 }
