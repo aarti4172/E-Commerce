@@ -1,0 +1,27 @@
+<p>update-merchant works!</p>
+
+
+<div class="container" align="center">
+<h2>Update Merchant details</h2>
+ <form #upForm="ngForm" name="update" (ngsubmit)="update()">
+    
+        <div class="form-group">
+            <input type="text" name="name" [(ngModel)]="merchant.Name">
+
+        </div>
+        <div class="form-group">
+            <input type="text" name="phone" [(ngModel)]="merchant.PhoneNo">
+
+        </div>
+        <div class="form-group">
+            <input type="text" name="phone" [(ngModel)]="merchant.Alternate_phone_no">
+
+        </div>
+        <div class="form-group">
+            <input type="text" name="phone" [(ngModel)]="merchant.alternate_email">
+
+        </div>
+
+
+ </form>
+</div>
