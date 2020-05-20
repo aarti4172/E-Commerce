@@ -1,14 +1,9 @@
-package com.capstore.app.models;
+package com.store.project.entity;
 
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,60 +13,70 @@ public class Product {
 	@Id
 	@Column(name = "product_id")
 	private int productId;
+	
 	@Column(name = "product_name")
     private String productName;
+	
 	@Column(name = "product_image")
     private String productImage;
+	
 	@Column(name = "product_price")
     private double productPrice;
+	
 	@Column(name = "product_rating")
     private int productRating;
+	
 	@Column(name = "no_of_product_viewed")
     private int noOfProductViewed;
+	
 	@Column(name = "product_brand")
     private String productBrand;
+	
 	@Column(name = "no_of_products")
     private int noOfProducts;
+	
 	@Column(name = "product_info")
     private String productInfo;
+	
 	@Column(name = "discount")
 	private int discount;
+	
 	@Column(name = "product_category")
     private String productCategory;
+	
 	@Column(name = "product_activated")
     private boolean productActivated;
+	
 	@Column(name = "status")
     private boolean status;
+	
 	@Column(name = "featured")
     private boolean featured;
-	@Column(name = "product_merchant_id")
-    private int productMerchantId;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ProductFeedback.class)
-	Set<ProductFeedback> productfeedbacks;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Cart.class)
-    private Set<Cart> customerCarts;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Inventory.class)
-    private int inventoryId;
+	
     
-    
-	public Set<ProductFeedback> getProductfeedbacks() {
-		return productfeedbacks;
+	public Product(String productName, String productImage, double productPrice, int productRating,
+			int noOfProductViewed, String productBrand, int noOfProducts, String productInfo, int discount,
+			String productCategory, boolean productActivated, boolean status, boolean featured) {
+		super();
+		this.productName = productName;
+		this.productImage = productImage;
+		this.productPrice = productPrice;
+		this.productRating = productRating;
+		this.noOfProductViewed = noOfProductViewed;
+		this.productBrand = productBrand;
+		this.noOfProducts = noOfProducts;
+		this.productInfo = productInfo;
+		this.discount = discount;
+		this.productCategory = productCategory;
+		this.productActivated = productActivated;
+		this.status = status;
+		this.featured = featured;
+		
+		
 	}
-	public void setProductfeedbacks(Set<ProductFeedback> productfeedbacks) {
-		this.productfeedbacks = productfeedbacks;
-	}
-	public int getInventoryId() {
-		return inventoryId;
-	}
-	public void setInventoryId(int inventoryId) {
-		this.inventoryId = inventoryId;
-	}
-	public Set<Cart> getCustomerCarts() {
-		return customerCarts;
-	}
-	public void setCustomerCarts(Set<Cart> customerCarts) {
-		this.customerCarts = customerCarts;
-	}
+	
+	
+	
 	public int getProductId() {
 		return productId;
 	}
@@ -156,24 +161,16 @@ public class Product {
 	public void setFeatured(boolean featured) {
 		this.featured = featured;
 	}
-	public int getProductMerchantId() {
-		return productMerchantId;
-	}
-	public void setProductMerchantId(int productMerchantId) {
-		this.productMerchantId = productMerchantId;
-	}
-
 	
-	public Set<ProductFeedback> getFeedbacks() { return productfeedbacks; } 
-	public void setFeedbacks(Set<ProductFeedback> feedbacks) { this.productfeedbacks = feedbacks; }
-	 
+	
+
 	public Product() {
 	}
 	public Product(int productId, String productName, int productMerchantId) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
-		this.productMerchantId = productMerchantId;
+		
 	}
 	@Override
 	public String toString() {
@@ -182,7 +179,7 @@ public class Product {
 				+ noOfProductViewed + ", productBrand=" + productBrand + ", noOfProducts=" + noOfProducts
 				+ ", productInfo=" + productInfo + ", productCategory=" + productCategory + ", productActivated="
 				+ productActivated + ", status=" + status + ", featured=" + featured + ", productMerchantId="
-				+ productMerchantId + "]";
+				 + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -197,7 +194,7 @@ public class Product {
 		result = prime * result + productId;
 		result = prime * result + ((productImage == null) ? 0 : productImage.hashCode());
 		result = prime * result + ((productInfo == null) ? 0 : productInfo.hashCode());
-		result = prime * result + productMerchantId;
+		
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(productPrice);
@@ -245,8 +242,7 @@ public class Product {
 				return false;
 		} else if (!productInfo.equals(other.productInfo))
 			return false;
-		if (productMerchantId != other.productMerchantId)
-			return false;
+		
 		if (productName == null) {
 			if (other.productName != null)
 				return false;
@@ -260,8 +256,4 @@ public class Product {
 			return false;
 		return true;
 	}
-	
-	
-
-	
 }
