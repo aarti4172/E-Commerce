@@ -14,14 +14,14 @@ public interface AdminService {
 	public void updateMerchant(MerchantDetails m);
 	public MerchantDetails findMerchantById(Integer id);
 	
-	
+	//Managing Full Inventory/ all Products
+	int addProduct(Product product);
+	boolean removeProduct(int productId);
 	List<Product> getAllProducts();
-	//List<Product> getProductsbyInventoryId(int invertoryId);
 	Product getProductByProductId(int productId);
-	List<Product> getProductsByCategory(String productCategory);
-	List<Product> getProductsByBrand(String productBrand);
-	List<Product> getProductsByType(String productInfo);
-	List<Product> getFeaturedProducts();
+	boolean update(Product product);
+	boolean updateCategoryByCategory(String productCategory, String UpdatedCategory);
+	boolean updateCategoryById(int productId, String updatedCategory);
 	
 	
 	//add, remove, view customers using customerrepository
