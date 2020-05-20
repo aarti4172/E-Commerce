@@ -1,5 +1,4 @@
-package com.store.project.entity;
-
+package com.capstore.app.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
