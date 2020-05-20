@@ -16,7 +16,13 @@ import { AdminComponent } from './admin/admin.component';
     ShowMerchantComponent,
     UpdateMerchantComponent,
     ThirdPartyMerchantComponent,
-    AdminComponent
+    AdminComponent,
+    AddProductComponent,
+    ProductListComponent,
+    UpdateProductComponent,
+    UpdateCategoryComponent,
+    CategoryByCategoryComponent,
+    CategoryByIdComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,7 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
