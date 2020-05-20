@@ -10,14 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.example.main.model.CommonFeedback;
 import com.example.main.model.CustomerDetails;
-import com.example.main.model.Inventory;
 import com.example.main.model.MerchantDetails;
 import com.example.main.model.Product;
 import com.example.main.model.ProductFeedback;
 import com.example.main.model.User;
 import com.example.main.repository.CommonFeedbackRepository;
 import com.example.main.repository.CustomerRepository;
-import com.example.main.repository.InventoryRepository;
 import com.example.main.repository.MerchantRepository;
 import com.example.main.repository.ProductFeedbackRepository;
 import com.example.main.repository.ProductRepository;
@@ -34,9 +32,6 @@ public class AdminDaoImpl implements AdminDao{
 	@Autowired
 	@Qualifier(value="CustomerRepository")
 	private CustomerRepository customerRepository;
-	@Autowired
-	@Qualifier(value="InventoryRepository")
-	private InventoryRepository inventoryRepository;
 	@Autowired
 	@Qualifier(value="ProductRepository")
 	private ProductRepository productRepository;
@@ -76,51 +71,73 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public List<Inventory> getAllInventories() {
-		return inventoryRepository.findAll();
+	public int addProduct(Product product) {
+		productRepository.save(product);
+		return product.getProductId();
 	}
-
+	
+	@Override
+	public boolean removeProduct(int productId) {
+		boolean exists = productRepository.existsById(productId);
+		if(exists==true) {
+		productRepository.deleteById(productId);
+		return true;
+		}
+		else
+			return false;
+	}
+	
 	@Override
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
 	}
-
-	@Override
-	public List<Product> getProductsbyInventoryId(int invertoryId) {
-		return productRepository.findByInventoryId(invertoryId);
-	}
-
+	
 	@Override
 	public Product getProductByProductId(int productId) {
-		return productRepository.findByProductId(productId);
+		return productRepository.findById(productId).get();
+	}
+	
+	@Override
+	public boolean update(Product product) {
+		boolean exists = productRepository.existsById(product.getProductId());
+		if(exists==true) {
+		Product p = productRepository.findById(product.getProductId()).get();
+		p.setFeatured(product.isFeatured());
+		p.setNoOfProducts(product.getNoOfProducts());
+		p.setNoOfProductViewed(product.getNoOfProductViewed());
+		p.setProductActivated(product.isProductActivated());
+		p.setProductBrand(product.getProductBrand());
+		p.setProductCategory(product.getProductCategory());
+		p.setProductImage(product.getProductImage());
+		p.setProductInfo(product.getProductInfo());
+		p.setProductName(product.getProductName());
+		p.setProductPrice(product.getProductPrice());
+		p.setProductRating(product.getProductRating());
+		p.setStatus(product.isStatus());
+		productRepository.save(p);
+		return true;
+		}
+		return false;
 	}
 
 	@Override
-	public List<Product> getProductsByCategory(String productCategory) {
-		return productRepository.findByProductCategory(productCategory);
-	}
-
-	@Override
-	public List<Product> getProductsByBrand(String productBrand) {
-		return productRepository.findByProductBrand(productBrand);
-	}
-
-	@Override
-	public List<Product> getProductsByType(String productInfo) {
-		return productRepository.findByProductInfo(productInfo);
-	}
-
-	@Override
-	public List<Product> getFeaturedProducts() {
-		List<Product> products= getAllProducts();
+	public boolean updateCategoryByCategory(String productCategory, String updatedCategory) {
+		List<Product> products = productRepository.findAllByProductCategory(productCategory);
 		Iterator<Product> i = products.iterator();
 		while(i.hasNext()) {
 			Product pr= (Product)i.next();
-			if(pr.isFeatured()==false) {
-				i.remove();
-			}
+			pr.setProductCategory(updatedCategory);
 		}
-		return products;
+		productRepository.saveAll(products);
+		return true;
+	}
+
+	@Override
+	public boolean updateCategoryById(int productId, String updatedCategory) {
+		Product p = productRepository.findById(productId).get();
+		p.setProductCategory(updatedCategory);
+		productRepository.save(p);
+		return true;
 	}
 
 	
