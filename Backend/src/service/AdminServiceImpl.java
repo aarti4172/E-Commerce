@@ -62,39 +62,38 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public int addProduct(Product product) {
+		return admindao.addProduct(product);
+	}
+
+	@Override
+	public boolean removeProduct(int productId) {
+		return admindao.removeProduct(productId);
+	}
+
+	@Override
 	public List<Product> getAllProducts() {
-		// TODO Auto-generated method stub
 		return admindao.getAllProducts();
 	}
 
 	@Override
 	public Product getProductByProductId(int productId) {
-		// TODO Auto-generated method stub
 		return admindao.getProductByProductId(productId);
 	}
 
 	@Override
-	public List<Product> getProductsByCategory(String productCategory) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean update(Product product) {
+		return admindao.update(product);
 	}
 
 	@Override
-	public List<Product> getProductsByBrand(String productBrand) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean updateCategoryByCategory(String productCategory, String updatedCategory) {
+		return admindao.updateCategoryByCategory(productCategory, updatedCategory);
 	}
 
 	@Override
-	public List<Product> getProductsByType(String productInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> getFeaturedProducts() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean updateCategoryById(int productId, String updatedCategory) {
+		return admindao.updateCategoryById(productId, updatedCategory);
 	}
 
 	@Override
