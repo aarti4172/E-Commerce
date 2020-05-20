@@ -12,7 +12,13 @@ const routes: Routes = [
   {path:'addMerchant',component:AddMerchantComponent},
   {path:'show',component:ShowMerchantComponent},
   {path: 'admin',component:AdminComponent},
-  {path:'thirdparty',component:ThirdPartyMerchantComponent}
+  {path:'thirdparty',component:ThirdPartyMerchantComponent},
+  {path:'productList', component:ProductListComponent},
+  {path:'addProduct',component:AddProductComponent},
+  {path:'updateProduct',component:UpdateProductComponent},
+  {path:'updateCategory',component:UpdateCategoryComponent},
+  {path:'ByCategory',component:CategoryByCategoryComponent},
+  {path:'ById',component:CategoryByIdComponent}
 ];
 
 @NgModule({
