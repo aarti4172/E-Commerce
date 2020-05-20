@@ -21,14 +21,13 @@ public interface AdminDao {
 	
 	
 	//search, view using inventory repository9name, category, type
-	List<Inventory> getAllInventories();
+	int addProduct(Product product);
 	List<Product> getAllProducts();
-	List<Product> getProductsbyInventoryId(int invertoryId);
+	boolean removeProduct(int productId);
 	Product getProductByProductId(int productId);
-	List<Product> getProductsByCategory(String productCategory);
-	List<Product> getProductsByBrand(String productBrand);
-	List<Product> getProductsByType(String productInfo);
-	List<Product> getFeaturedProducts();
+	boolean update(Product product);
+	boolean updateCategoryByCategory(String productCategory, String updatedCategory);
+	boolean updateCategoryById(int productId, String updatedCategory);
 	
 	
 	//add, remove, view customers using customerrepository
