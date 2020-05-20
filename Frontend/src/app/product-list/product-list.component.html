@@ -1,0 +1,54 @@
+<h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;"> Products</h1>
+
+<header>
+  <br>
+   <nav class ="navbar navbar-expand-md navbar-dark bg-secondary justify-content-end">
+     <ul class="navbar-nav">
+      <li><a routerLink = "/admin" style="color: white;">Admin</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li><a routerLink = "/addProduct" style="color: white;">Add Product</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li><a routerLink = "/updateCategory" style="color: white;">Update Category</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     </ul>
+   </nav>    
+</header>
+<br>
+
+<button (click)="back()"  class="btn btn-secondary" style="margin-left: 10px">Back</button>
+<table class="table table-striped table table-hover">
+    <thead class="thead-light">
+    <th>Product Id</th>
+    <th>Product Name</th>
+    <th>Product Image Url</th>
+    <th>Product Price</th>
+    <th>Product Rating</th>
+    <th>No. Of Products Viewed</th>
+    <th>Product Brand</th>
+    <th>No. Of Products</th>
+    <th>Product Info</th>
+    <th>Product Category</th>
+    <th>Product Activated</th>
+    <th>Status</th>
+    <th>Featured</th>
+    <th>Activity</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of result">
+        <td>{{p.productId}}</td>
+        <td>{{p.productName}}</td>
+        <td><img [src]="p.productImage" alt="img" height="150px" width=150px></td>
+        <td>{{p.productPrice}}</td>
+        <td>{{p.productRating}}</td>
+        <td>{{p.noOfProductViewed}}</td>
+        <td>{{p.productBrand}}</td>
+        <td>{{p.noOfProducts}}</td>
+        <td>{{p.productInfo}}</td>
+        <td>{{p.productCategory}}</td>
+        <td>{{p.productActivated}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.featured}}</td>
+        <td><button (click)="update()" class="btn btn-info">Update</button>
+        <br><br><button (click)="remove(p.productId)" class="btn btn-danger">Remove</button></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<button (click)="back()"  class="btn btn-secondary" style="margin-left: 10px">Back</button>
