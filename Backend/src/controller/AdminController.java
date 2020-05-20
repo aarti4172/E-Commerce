@@ -114,5 +114,50 @@ public class AdminController {
 	 {
 		 return AdminService.removeProductbyId(productID);
 	 }
+	
+	//add a new product
+	@PostMapping("/addProduct")
+	int addProduct(@RequestBody Product product) {
+		product.setProductId((int)(Math.random()*100000));
+		product.setDiscount(0);
+		return AdminService.addProduct(product);
+	}
+	
+	//get all the products
+	@GetMapping("/getAllProducts")
+	List<Product> getAllProducts(){
+		return AdminService.getAllProducts();
+	}
+	
+	//remove a product
+	@DeleteMapping("/deleteProduct/{productId}")
+	boolean removeProduct(@PathVariable int productId) {
+		return AdminService.removeProduct(productId);
+	}
+	
+	//get a product by product id
+	@GetMapping("/getProductById/{productId}")
+	Product getProductByProductId(@PathVariable int productId) {
+		return AdminService.getProductByProductId(productId);
+	}
+	
+	//update product
+	@PutMapping("/updateProduct")
+	boolean update(@RequestBody Product product) {
+		return AdminService.update(product);
+	}
+	
+	//update category by category
+	@PutMapping("/updateByCategory")
+	boolean updateCategoryByCategory(@RequestParam("productCategory")String productCategory, @RequestParam("updatedCategory")String updatedCategory) {
+		return AdminService.updateCategoryByCategory(productCategory, updatedCategory);
+	}
+	
+	//update category by Id
+	@PutMapping("/updatedById")
+	boolean updateCategoryById(@RequestParam("productId")Integer productId, @RequestParam("updatedCategory")String updatedCategory) {
+		return AdminService.updateCategoryById(productId, updatedCategory);
+	}
+	
 	 
 }
