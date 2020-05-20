@@ -1,23 +1,16 @@
-package com.example.main.repository;
+package com.store.project.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.main.model.Product;
+import com.store.project.entity.Product;
 
 @Repository(value="ProductRepository")
 public interface ProductRepository extends JpaRepository<Product,Integer> {
-
-	List<Product> findByInventoryId();
-
-	Product findByProductId();
-
-	List<Product> findByProductBrand();
-
-	List<Product> findByProductInfo();
-
-	List<Product> findByProductCategory();
-
+	
+	List<Product> findAllByProductCategory(String productCategory);
+	boolean existsByProductCategory(String productCategory);
+	
 }
