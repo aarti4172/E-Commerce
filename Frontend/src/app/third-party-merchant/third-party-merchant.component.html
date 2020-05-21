@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label for="userName">Enter UserName</label>
                 <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="userName" name="userName"
-                    class="form-control" [(ngModel)]="merchant.Username" #userName="ngModel"
+                    class="form-control" [(ngModel)]="merchant1.username" #userName="ngModel"
                     placeholder="Enter Merchant UserName" required autocomplete="off"
                     aria-describedby="merchantNameHelp">
                 <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="inputname">Enter Name</label>
                 <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="name" name="name"
-                    class="form-control" [(ngModel)]="merchant.Name" #name="ngModel"
+                    class="form-control" [(ngModel)]="merchant1.name" #name="ngModel"
                     placeholder="Enter Merchant Name" required autocomplete="off"
                     aria-describedby="merchantNameHelp">
                 <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label for="inputname">Enter Phone number</label>
                 <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="phoneno" name="phoneno"
-                    class="form-control" [(ngModel)]="merchant.PhoneNo" #phone="ngModel"
+                    class="form-control" [(ngModel)]="merchant1.phone_number" #phone="ngModel"
                     placeholder="Enter Mobile number" required autocomplete="off"
                     aria-describedby="mobileHelp">
                     <small id="mobileHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="inputname">Enter Alternate Phone number</label>
                     <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="altphoneno" name="altphoneno"
-                        class="form-control" [(ngModel)]="merchant.Alternate_phone_no" #altphone="ngModel"
+                        class="form-control" [(ngModel)]="merchant1.alternate_phone_number" #altphone="ngModel"
                         placeholder="Enter Mobile number" required autocomplete="off"
                         aria-describedby="mobileHelp">
                         <small id="mobileHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label for="userName">Enter Email</label>
                         <input type="email" maxlength="20" id="emailid" name="emailid"
-                            class="form-control" [(ngModel)]="merchant.alternate_email" #emailid="ngModel"
+                            class="form-control" [(ngModel)]="merchant1.alternate_email" #emailid="ngModel"
                             placeholder="Enter Merchant Email" required autocomplete="off"
                             aria-describedby="merchantemailHelp">
                         <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -76,7 +76,7 @@
                     <div class= "form-group">
                         <label for="inputpassword"> Enter Password</label>
                         <input type="password" maxlength="20" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,20})"
-                            id="password" name="password" [(ngModel)]="merchant.password" #passwordcontrol="ngModel" 
+                            id="password" name="password" [(ngModel)]="merchant1.password" #passwordcontrol="ngModel" 
                             autocomplete="off" required class="form-control" placeholder="Enter Merchant Password"
                             aria-describedby="passwordHelp">
                         <small id="passwordHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -110,4 +110,3 @@
     </div>
     
     
-</div>
