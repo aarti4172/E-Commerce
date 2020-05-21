@@ -13,7 +13,7 @@ export class AdminServiceService {
   baseUrl ='http://localhost:8080/Capstore/admin';
   product: Product;
   constructor(private http: HttpClient) { }
-
+  //merchant
   addNewMerchant(data){
     let options = {   method: "POST",
     body: JSON.stringify(data),
@@ -21,7 +21,9 @@ export class AdminServiceService {
                 return fetch(this.baseUrl+"/newMerchant",options);
 
   }
-  
+   getMerchant(id){
+    return this.http.get(this.baseUrl+"/AllMerchants/"+id);
+  }
   getAllMerchantsList():Observable<any>{
     return this.http.get(this.baseUrl+"/AllMerchants");
   }
