@@ -49,6 +49,17 @@ public class EmailService {
 		
 	}
 	
+	public void sendInvitationMail(String email) throws MailException{
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(email);
+		mail.setSubject("Invitation to Capstore!");
+		mail.setText("We are inviting you to join Capstore as a merchant, please click here : "
+	            +"http://localhost:8080/Capstore/admin/addMerchant");
+		
+		javaMailSender.send(mail);
+	}
+	
 	
 	
 
