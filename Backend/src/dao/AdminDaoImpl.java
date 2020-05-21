@@ -103,15 +103,24 @@ public class AdminDaoImpl implements AdminDao{
 		if(exists==true) {
 		Product p = productRepository.findById(product.getProductId()).get();
 		p.setFeatured(product.isFeatured());
+		if(product.getNoOfProducts()!=0)
 		p.setNoOfProducts(product.getNoOfProducts());
+		if(product.getNoOfProductViewed()!=0)
 		p.setNoOfProductViewed(product.getNoOfProductViewed());
 		p.setProductActivated(product.isProductActivated());
+		if(product.getProductBrand()!=null)
 		p.setProductBrand(product.getProductBrand());
+		if(product.getProductCategory()!=null)
 		p.setProductCategory(product.getProductCategory());
+		if(product.getProductImage()!=null)
 		p.setProductImage(product.getProductImage());
+		if(product.getProductInfo()!=null)
 		p.setProductInfo(product.getProductInfo());
+		if(product.getProductName()!=null)
 		p.setProductName(product.getProductName());
+		if(product.getProductPrice()!=0)
 		p.setProductPrice(product.getProductPrice());
+		if(product.getProductRating()!=0)
 		p.setProductRating(product.getProductRating());
 		p.setStatus(product.isStatus());
 		productRepository.save(p);
