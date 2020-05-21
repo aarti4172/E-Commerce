@@ -30,6 +30,8 @@ public class AdminController {
 	@Autowired
 	AdminServiceInteface AdminService;
 	
+	private EmailService emailService;
+	
 	@RequestMapping(value="/hello")
 	public String sayHello() {
 		return "Hello World! from Capstore Spring Framework!";
@@ -70,7 +72,7 @@ public class AdminController {
 	//Update Customer
 	 
 	 
-	 //Add Merchnat
+	 //Add Merchant
 	 @PostMapping("/merchant")
 		public MerchantDetails addMerchant(@RequestBody MerchantDetails merchant)
 		{
@@ -103,6 +105,14 @@ public class AdminController {
 			response.put("deleted", Boolean.TRUE);
 			return response;
 		}
+	
+	//sending invite to merchants
+	@RequestMapping(value ="/invite",method = { RequestMethod.GET,RequestMethod.POST })
+	public void invite(String email)
+	{
+		emailService.sendInvitationMail(email);
+		
+	}
 	 //Get all Products
 	 @RequestMapping("products")
 		public List<Product> getAllProducts(){
