@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../model/Product';
+import { Product } from '../Product';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../admin.service';
 import { Router } from '@angular/router';
@@ -22,15 +22,15 @@ export class UpdateProductComponent implements OnInit {
   ngOnInit(){
     this.productForm = this.formBuilder.group({
       id:['',Validators.required],
-      name:['',[Validators.required,Validators.pattern]],
-      image:['',Validators.required],
-      price:['',Validators.required],
-      rating:['',Validators.required],
-      viewed:['',Validators.required],
-      numberProducts:['',Validators.required],
-      brand:['',[Validators.required,Validators.pattern]],
-	    info:['',[Validators.required,Validators.pattern]],
-      category:['',[Validators.required,Validators.pattern]],
+      name:[''],
+      image:[''],
+      price:[''],
+      rating:[''],
+      viewed:[''],
+      numberProducts:[''],
+      brand:[''],
+	    info:[''],
+      category:[''],
       activated:['',Validators.required],
       status:['',Validators.required],
       featured:['',Validators.required]
