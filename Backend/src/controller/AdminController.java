@@ -81,6 +81,12 @@ public class AdminController {
 			
 		}
 	 
+	//Get Merchant by id
+	@GetMapping(value = "/AllMerchants/{id}")
+	public MerchantDetails getMerchant(Integer id) {
+		return AdminService.findMerchantById(id);
+		
+	}
 	 //Get All Merchant
 	 @GetMapping("/merchant")
 	 public ResponseEntity<List<MerchantDetails>> getAllMerchants(){
@@ -113,6 +119,14 @@ public class AdminController {
 		emailService.sendInvitationMail(email);
 		
 	}
+	
+	//updateMerchant
+	@PutMapping(value="/updateMerchant")
+	public void update( MerchantDetails merchantObject)
+	{
+		AdminService.updateMerchant(merchantObject);
+	}
+	
 	 //Get all Products
 	 @RequestMapping("products")
 		public List<Product> getAllProducts(){
