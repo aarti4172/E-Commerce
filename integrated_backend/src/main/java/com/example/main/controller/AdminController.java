@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.main.exception.UserAlreadyExistsException;
+import com.example.main.model.CommonFeedback;
 import com.example.main.model.Coupon;
 import com.example.main.model.CustomerDetails;
 import com.example.main.model.MerchantDetails;
@@ -217,6 +218,41 @@ public class AdminController {
 			adminService.addCoupon(coupon);
 			return new ResponseEntity<Coupon>(HttpStatus.CREATED);
 			   
+		}
+	
+	
+	
+	
+	//Common Feedback:
+		
+		@PutMapping(value="/forwardRequestToMerchant/{feedbackId}")
+		public int forwardRequestToMerchant(@PathVariable int feedbackId) {
+			return adminService.forwardRequestToMerchant(feedbackId);
+		}
+		
+		@GetMapping(value="/forwardResponseToCustomer/{feedbackId}")
+		public String forwardResponseToCustomer(@PathVariable int feedbackId) {
+			return adminService.forwardResponseToCustomer(feedbackId);
+		}
+		
+		@GetMapping(value="/getAllCommonFeedbackByUserId/{userId}")
+		public List<CommonFeedback> getAllCommonFeedbackByUserId(@PathVariable("userId") int userId) {
+			return adminService.getAllCommonFeedbackByUserId(userId);
+		}
+		
+		@GetMapping(value="/getCommonFeedbackById/{feedbackId}")
+		public CommonFeedback getCommonFeedbackById(@PathVariable("feedbackId") int feedbackId) {
+			return adminService.getCommonFeedbackById(feedbackId);
+		}
+		
+		@GetMapping(value="/getAllCommonFeedbackByProductId/{productId}")
+		public List<CommonFeedback> getAllCommonFeedbackByProductId(@PathVariable("productId") int productId) {
+			return adminService.getAllCommonFeedbackByProductId(productId);
+		}
+		
+		@GetMapping(value="/getAllCommonFeedback")
+		public List<CommonFeedback> getAll() {
+			return adminService.getAll();
 		}
 		
 		 
