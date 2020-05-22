@@ -30,7 +30,6 @@ public interface AdminService {
 	Product getProductByProductId(int productId);
 	boolean update(Product product);
 	boolean updateCategoryByCategory(String productCategory, String UpdatedCategory);
-	boolean updateCategoryById(int productId, String updatedCategory);
 	
 	
 	//Customer
