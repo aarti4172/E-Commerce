@@ -1,61 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/Product';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminService } from 'src/app/service/admin.service';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/models/Product';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class ProductListComponent implements OnInit {
 
-  product:Product = new Product();
-  message: any;
-  productForm: FormGroup;
-  submitted=false;
-  check=false;
+  products:Product[]=[];
+  searchTerm;
+  location:String;
+  constructor(private router:Router,
+    private adminService:AdminService) { }
 
-  constructor(private formBuilder: FormBuilder,private adminService: AdminService, private router: Router) { }
+  ngOnInit() {
 
-  ngOnInit(){
-    this.productForm = this.formBuilder.group({
-      name:['',Validators.required],
-      image:['',Validators.required],
-      price:['',Validators.required],
-      rating:['',Validators.required],
-      viewed:['',Validators.required],
-      numberProducts:['',Validators.required],
-      brand:['',Validators.required],
-	    info:['',Validators.required],
-      category:['',Validators.required],
-      activated:['',Validators.required],
-      status:['',Validators.required],
-      featured:['',Validators.required]
-    });
+    this.adminService.getAllProducts().subscribe(
+      data=>{
+        this.products=data;
+        //this.location=this.products.productImage;
+   
+      },
+      error=>{
+        console.log(error);
+      }
+    );
+    
   }
-  
-  addProduct(){
-    this.submitted = true;
-    if(this.productForm.invalid)
-    return;
-    else{
-      this.check=true;
-    this.adminService.addProduct(this.product).subscribe(data => {
-      console.log(data);
-      this.product = new Product();
-      this.message = data;
-    }, err => 
-    { console.log(err.stack);
-    });
-  }
-}
 
-  list()
+  // featured(){
+  //   this.adminService.getFeaturedProducts().subscribe(
+  //     data=>{
+  //       this.products = data;
+  //     },
+  //     error=>{
+  //       console.log(error);
+  //     }
+  //   )
+  // }
+
+  deleteProduct(productId:number)
   {
-    this.router.navigate(['/productList']);
+    this.adminService.deleteProduct(productId);
+    alert("Deleted");
   }
 
+  update(){
+    this.router.navigate(['/updateProduct']);
+  }
 
+  back()
+  {
+      this.router.navigate(['/admin']);
+  }
 }
