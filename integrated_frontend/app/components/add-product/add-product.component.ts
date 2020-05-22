@@ -1,59 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class AddProductComponent implements OnInit {
 
-  products:Product[]=[];
-  searchTerm;
-  location:String;
-  constructor(private router:Router,
-    private adminService:AdminService) { }
+  product:Product = new Product();
+  message: any;
+  productForm: FormGroup;
+  submitted=false;
+  check=false;
 
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder,private adminService: AdminService, private router: Router) { }
 
-    this.adminService.getAllProducts().subscribe(
-      data=>{
-        this.products=data;
-        //this.location=this.products.productImage;
-   
-      },
-      error=>{
-        console.log(error);
-      }
-    );
-    
+  ngOnInit(){
+    this.productForm = this.formBuilder.group({
+      name:['',Validators.required],
+      image:['',Validators.required],
+      price:['',Validators.required],
+      rating:['',Validators.required],
+      viewed:['',Validators.required],
+      numberProducts:['',Validators.required],
+      brand:['',Validators.required],
+	    info:['',Validators.required],
+      category:['',Validators.required],
+      activated:['',Validators.required],
+      status:['',Validators.required],
+      featured:['',Validators.required]
+    });
   }
+  
+  addProduct(){
+    this.submitted = true;
+    if(this.productForm.invalid)
+    return;
+    else{
+      this.check=true;
+    this.adminService.addProduct(this.product).subscribe(data => {
+      console.log(data);
+      this.product = new Product();
+      this.message = data;
+    }, err => 
+    { console.log(err.stack);
+    });
+  }
+}
 
-  // featured(){
-  //   this.adminService.getFeaturedProducts().subscribe(
-  //     data=>{
-  //       this.products = data;
-  //     },
-  //     error=>{
-  //       console.log(error);
-  //     }
-  //   )
-  // }
-
-  deleteProduct(productId:number)
+  list()
   {
-    this.adminService.deleteProduct(productId);
-    alert("Deleted");
+    this.router.navigate(['/showProduct']);
   }
 
-  update(){
-    this.router.navigate(['/updateProduct']);
-  }
-
-  back()
-  {
-      this.router.navigate(['/admin']);
-  }
 }
