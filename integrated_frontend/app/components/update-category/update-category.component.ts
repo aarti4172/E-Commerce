@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-category',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateCategoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
+ back(){
+    this.router.navigate(['/productList']);
+  }
 }
