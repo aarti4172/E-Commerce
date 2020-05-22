@@ -148,21 +148,6 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
-	public List<Product> getProductsByCategory(String productCategory) {
-		return productRepository.findByProductCategory(productCategory);
-	}
-
-	@Override
-	public List<Product> getProductsByBrand(String productBrand) {
-		return productRepository.findByProductBrand(productBrand);
-	}
-
-	@Override
-	public List<Product> getProductsByType(String productInfo) {
-		return productRepository.findByProductInfo(productInfo);
-	}
-	
-	@Override
 	public boolean update(Product product) {
 		boolean exists = productRepository.existsById(product.getProductId());
 		if(exists==true) {
@@ -209,13 +194,13 @@ public class AdminDaoImpl implements AdminDao{
 		return true;
 	}
 
-	@Override
-	public boolean updateCategoryById(int productId, String updatedCategory) {
-		Product p = productRepository.findById(productId).get();
-		p.setProductCategory(updatedCategory);
-		productRepository.save(p);
-		return true;
-	}
+// 	@Override
+// 	public boolean updateCategoryById(int productId, String updatedCategory) {
+// 		Product p = productRepository.findById(productId).get();
+// 		p.setProductCategory(updatedCategory);
+// 		productRepository.save(p);
+// 		return true;
+// 	}
 
 	@Override
 	public List<Product> getFeaturedProducts() {
