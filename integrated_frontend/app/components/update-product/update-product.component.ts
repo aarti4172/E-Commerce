@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../models/Product';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AdminService } from '../../../admin-service.service';
 import { Router } from '@angular/router';
-
+import { Product } from 'src/app/models/Product';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-update-product',
@@ -11,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./update-product.component.css']
 })
 export class UpdateProductComponent implements OnInit {
- product:Product = new Product();
+
+  product:Product = new Product();
   message: any;
   msg: any;
   productForm: FormGroup;
@@ -48,15 +48,21 @@ export class UpdateProductComponent implements OnInit {
       this.message = data;
       if(this.message==true){
         this.msg="You have successfully updated the product details";
-        alert(this.message);
-        this.router.navigate(['/productList']);
-    }}, err => 
+        alert(this.msg);
+        this.router.navigate(['/showProduct']);
+    }
+    else{
+      this.msg="Enter correct product ID";
+      alert(this.msg);
+      this.router.navigate(['/showProduct']);
+    }
+  }, err => 
     { console.log(err.stack);
     });
   }
   }
 
   back(){
-    this.router.navigate(['/productList']);
+    this.router.navigate(['/showProduct']);
   }
 }
