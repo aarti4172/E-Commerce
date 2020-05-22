@@ -41,11 +41,12 @@ public interface AdminService {
 	
 	
 	//Common feedbacks
-	CommonFeedback addCommonFeedback(CommonFeedback cfd);
-	void removeCommonFeedbackById(int feedbackId);
-	void removeCommonFeedbackByUserId(int userId);
-	List<CommonFeedback> getAllCommonFeedbackByUserId(int userId);//LogicNotWritten
+	List<CommonFeedback> getAllCommonFeedbackByProductId(int productId);
 	CommonFeedback getCommonFeedbackById(int feedbackId);
+	List<CommonFeedback> getAllCommonFeedbackByUserId(int userId);
+	int forwardRequestToMerchant(int feedbackId);
+	String forwardResponseToCustomer(int feedbackId);
+	List<CommonFeedback> getAll();
 	
 	
 	//Product feedbacks
