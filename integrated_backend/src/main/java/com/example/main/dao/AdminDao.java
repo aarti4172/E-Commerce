@@ -24,12 +24,8 @@ public interface AdminDao {
 	//product
 	List<Product> getAllProducts();
 	Product getProductByProductId(int productId);
-	List<Product> getProductsByCategory(String productCategory);
-	List<Product> getProductsByBrand(String productBrand);
-	List<Product> getProductsByType(String productInfo);
 	List<Product> getFeaturedProducts();
 	boolean updateCategoryByCategory(String productCategory, String updatedCategory);
-	boolean updateCategoryById(int productId, String updatedCategory);
 	boolean update(Product product);
 	boolean removeProduct(int productId);
 	Product addProduct(Product product);
