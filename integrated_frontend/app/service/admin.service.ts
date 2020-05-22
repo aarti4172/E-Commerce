@@ -16,7 +16,7 @@ export class AdminService {
   baseUrl="http://localhost:9091/capstore/admin";
   baseUrlMerchant="http://localhost:9091/admin/merchant";
  // baseUrl ='http://localhost:8080/Capstore/admin';
-  baseUrlProduct="http://localhost:9091/admin";
+
   constructor(private http:HttpClient) { }
 
   //------------------------------------------------user-----------------------------------------------------------------------------------------------------------------
@@ -59,10 +59,10 @@ export class AdminService {
   {
     return this.http.get(`${this.baseUrl}`+"/getAllProducts").pipe(catchError(this.handleError));
   }
-  deleteProduct(productID:number):Observable<any>
+ /* deleteProduct(productID:number):Observable<any>
   {
     return this.http.delete(`${this.baseUrlProduct}/products/${productID}`);
-  }
+  }*/
   //Product Section
   /*getAllProducts(): Observable<Object>{
     return this.http.get<Product[]>(`${this.baseUrl}/getAllProducts`);
@@ -88,10 +88,6 @@ export class AdminService {
     return this.http.put<boolean>(`${this.baseUrl}/updateByCategory?productCategory=${productCategory}&updatedCategory=${updatedCategory}`,productCategory);
   }
 
-  updateCategoryById(productId: number, updatedCategory: String): Observable<Object>{
-    return this.http.put<boolean>(`${this.baseUrl}/updatedById?productId=${productId}&updatedCategory=${updatedCategory}`,productId);
-  }
-  
   //------------------------------------------------Promocode----------------------------------------------------------------------------------------------
   
   addPromocode(Coupon:Object) :Observable<Object>
