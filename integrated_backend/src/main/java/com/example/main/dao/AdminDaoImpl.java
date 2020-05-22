@@ -42,6 +42,7 @@ public class AdminDaoImpl implements AdminDao{
 	@Qualifier(value="ProductFeedbackRepository")
 	private ProductFeedbackRepository productFeedbackRepository;
 	
+	@Autowired
 	@Qualifier(value="CommonFeedbackRepository")
 	private CommonFeedbackRepository commonFeedbackRepository;
 	
@@ -298,8 +299,9 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public int forwardRequestToMerchant(CommonFeedback cfd) {
+	public int forwardRequestToMerchant(int feedbackId) {
 		int merchantId = 0;
+		CommonFeedback cfd =  getCommonFeedbackById(feedbackId);
 		if(cfd.isRequestFlag()== true) {
 			cfd.setRequestApproved(true);
 			Product product= productRepository.findByProductId(cfd.getProductId());
@@ -309,11 +311,17 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public String forwardResponseToCustomer(CommonFeedback cfd) {
+	public String forwardResponseToCustomer(int feedbackId) {
+		CommonFeedback cfd =  getCommonFeedbackById(feedbackId);
 		if(cfd.isResponseFlag() == true) {
 			cfd.setResponseApproved(true);
 		}
 		return cfd.getResponseMessage();
+	}
+	
+	@Override
+	public List<CommonFeedback> getAll() {
+		return commonFeedbackRepository.findAll();
 	}
 
 	
