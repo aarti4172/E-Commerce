@@ -6,10 +6,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update-merchant.component.css']
 })
 export class UpdateMerchantComponent implements OnInit {
+ merchant:MerchantDetails;
+  userid;
+  
 
-  constructor() { }
+  check=false;
+  status: string;
+  Rating:number;
+  isApproved;
+  constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
   }
+  getMerchant(){
+    this.adminService.getMerchant(this.userid).subscribe((data:any)=>{this.merchant=data})
+  }
+ update(){
+this.adminService.updateMerchant(this.merchant);
+   
+ }
+ onCheckboxValueChange():any{
+  this.check=!this.check
+  if(this.check){
+  this.status="Approved";
+  alert(this.status)
+  }
+  else{
+  this.status="Disapproved";
+  alert(this.status)
+  }
+  this.isApproved=this.check;
 
+
+}
 }
