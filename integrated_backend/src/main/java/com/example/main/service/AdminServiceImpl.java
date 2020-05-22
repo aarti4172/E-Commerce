@@ -112,12 +112,6 @@ public class AdminServiceImpl implements AdminService{
 	public boolean updateCategoryByCategory(String productCategory, String updatedCategory) {
 		return adminDao.updateCategoryByCategory(productCategory, updatedCategory);
 	}
-
-	@Override
-	public boolean updateCategoryById(int productId, String updatedCategory) {
-		return adminDao.updateCategoryById(productId, updatedCategory);
-	}
-	
 	
 	
 	//Customer:
