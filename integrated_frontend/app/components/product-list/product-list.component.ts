@@ -43,9 +43,20 @@ export class ProductListComponent implements OnInit {
   // }
 
   deleteProduct(productId:number)
-  {
-    this.adminService.deleteProduct(productId);
-    alert("Deleted");
+  { if(confirm("Are you sure you want to remove the product?")){
+    this.adminService.removeProduct(productId).subscribe(data => {
+      console.log(data);
+      this.msg=data;
+      if(this.msg==true)
+      {
+        this.message="Successfully removed the product";
+        alert(this.message);
+        this.listOfProducts();
+      }
+    }, err =>
+    { console.log(err.stack);
+    })
+  }
   }
 
   update(){
