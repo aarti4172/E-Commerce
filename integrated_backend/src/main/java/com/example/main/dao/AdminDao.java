@@ -45,11 +45,12 @@ public interface AdminDao {
 	
 	
 	//Common feedbacks
-	int forwardRequestToMerchant(CommonFeedback cfd);
-	String forwardResponseToCustomer(CommonFeedback cfd);
+	int forwardRequestToMerchant(int feedbackId);
+	String forwardResponseToCustomer(int feedbackId);
 	CommonFeedback getCommonFeedbackById(int feedbackId);
 	List<CommonFeedback> getAllCommonFeedbackByProductId(int productId);
 	List<CommonFeedback> getAllCommonFeedbackByUserId(int userId);
+	List<CommonFeedback> getAll();
 	
 	
 	
