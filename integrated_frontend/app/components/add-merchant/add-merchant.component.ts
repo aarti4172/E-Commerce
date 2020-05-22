@@ -9,17 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-merchant.component.css']
 })
 export class AddMerchantComponent implements OnInit {
-  merchant:MerchantDetails= new MerchantDetails();
-  Merchant_id:number;
-  Name:string;
-  //Username:string;
-  PhoneNo : String;
-  Alternate_phone_no : String;
-  Alternate_email: String;
-  check=false;
-  status: string;
-  Rating:number;
-  isApproved;
+ name:string;
+username:string;
+password;
+phone_number : String;
+alternate_phone_number : String;
+eMail:String;
+alternate_email: String;
+check=false;
+status: string;
+rating =0;
+isApproved;
+role="Merchant";
+isACtive=false;
+securityQueston=null;
+securityAnswer=null;
+products=null;
+user_address=null;
+product_feedback=null;
+coupons=null;
+merchant: MerchantDetails= new MerchantDetails(name,this.username,this.password,this.eMail,this.role,this.isACtive,this.securityQueston,this.securityAnswer,this.phone_number,
+  this.alternate_phone_number,this.alternate_email,this.products,this.user_address,this.product_feedback,this.coupons,this.isApproved,this.rating);
 
   constructor( private adminService: AdminService, private router: Router) { }
 
@@ -49,6 +59,4 @@ export class AddMerchantComponent implements OnInit {
 
 
   }
-
- 
 }
