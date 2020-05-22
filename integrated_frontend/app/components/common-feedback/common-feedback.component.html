@@ -1,0 +1,36 @@
+<p>common-feedback works!</p>
+<button (click)="back()"  class="btn btn-secondary" style="margin-left: 10px"><<Back</button>
+<div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>UserID </th>
+          <th>Product Id</th>
+          <th>Feedback ID</th>
+          <th>Subject</th>
+          <th>Message</th>
+          
+
+        </tr>
+      </thead>
+     <tbody>
+        <tr *ngFor="let feedback of feedbacks">
+          <td>{{feedback.userId}}</td>
+          <td>{{feedback.productId}}</td>
+          <td>{{feedback.feedbackID}}</td>
+          <td>{{feedback.feedbackSubject}}</td>
+          <td>{{feedback.feedbackMessage}}</td>
+         
+          
+         
+          <td><button  class="btn btn-secondary">Approve</button>
+              
+             
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+   
+</div>
+<button (click)="back()"  class="btn btn-secondary" style="margin-left: 10px"><<Back</button>
