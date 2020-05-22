@@ -1,4 +1,3 @@
-<p>product-list works!</p>
 <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;"> Products</h1>
 <header>
     
@@ -7,6 +6,7 @@
         <li><a routerLink = "/admin" style="color: white;">Admin</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li><a routerLink = "/addProducts" style="color: white;">Add Product</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li><a routerLink = "/updateCategory" style="color: white;">Update Category</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!--<li><a routerLink = "/getFeaturedProducts" style="color: white">Show All Featured Products</a></li>-->
        </ul>
      </nav>    
   </header>
@@ -36,9 +36,9 @@
         <td>{{p.productBrand}}</td>
         <td>{{p.productInfo}}</td>
         <td><img [src]="p.productImage" height="300px" width=300px></td>
-        <td><button (click)="deleteProduct(p.productId)"  class="btn btn-danger">Delete</button>
-            <button  class="btn btn-info" style="margin-left: 10px">Update</button>
-        
+        <td>
+          <button (click)="update()" class="btn btn-info" style="margin-left: 10px">Update</button>
+          <button (click)="deleteProduct(p.productId)"  class="btn btn-danger">Delete</button>
        </td>
 
 
