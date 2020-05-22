@@ -124,64 +124,69 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public void removeCustomerById(int userId) {
-		// TODO Auto-generated method stub
 		adminDao.removeCustomerById(userId);
 	}
 
 
 	@Override
 	public CustomerDetails findCustomerById(int userId) {
-		// TODO Auto-generated method stub
 		return adminDao.findCustomerById(userId);
 	}
 
 	@Override
 	public CustomerDetails findCustomerByName(String name) {
-		// TODO Auto-generated method stub
 		return adminDao.findCustomerByName(name);
 	}
 
 	@Override
 	public List<CustomerDetails> getAllCustomers() {
-		// TODO Auto-generated method stub
 		return adminDao.getAllCustomers();
 	}
 
-	@Override
-	public CommonFeedback addCommonFeedback(CommonFeedback cfd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeCommonFeedbackById(int feedbackId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeCommonFeedbackByUserId(int userId) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	
+	
+	
+	//CommonFeedback:
+	
+	
 	@Override
 	public List<CommonFeedback> getAllCommonFeedbackByUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return adminDao.getAllCommonFeedbackByUserId(userId);
 	}
 
 	@Override
 	public CommonFeedback getCommonFeedbackById(int feedbackId) {
-		// TODO Auto-generated method stub
-		return null;
+		return adminDao.getCommonFeedbackById(feedbackId);
+	}
+	
+	@Override
+	public List<CommonFeedback> getAllCommonFeedbackByProductId(int productId) {
+		return adminDao.getAllCommonFeedbackByProductId(productId);
 	}
 
 	@Override
-	public ProductFeedback addCommonFeedback(ProductFeedback cfd) {
-		// TODO Auto-generated method stub
-		return null;
+	public int forwardRequestToMerchant(int feedbackId) {
+		return adminDao.forwardRequestToMerchant(feedbackId);
 	}
+
+	@Override
+	public String forwardResponseToCustomer(int feedbackId) {
+		return adminDao.forwardResponseToCustomer(feedbackId);
+	}
+	
+	@Override
+	public List<CommonFeedback> getAll() {
+		return adminDao.getAll();
+	}
+
+
+	
+	
+	
+	
+	//ProductFeedback:
+	
 
 	@Override
 	public void removeProductFeedbackkById(int feedbackId) {
