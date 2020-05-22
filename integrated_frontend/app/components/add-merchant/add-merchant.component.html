@@ -9,13 +9,13 @@
   </div>
 <div class="container-fluid">
 
-    <h1 text-align="center"> Add New Merchant</h1>
-<div class="jumbotron" text-align="center">
+    <h1 align="center"> Add New Merchant</h1>
+<div class="jumbotron" align="center">
     <form #merchantForm="ngForm" name="signUpForm" (ngSubmit)="addMerchant()">
 
 
         <div class="form-group">
-            <label for="userName">Enter UserName</label>
+            <label for="userName" style="font-size: large;">Enter UserName</label>
             <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="userName" name="userName"
                 class="form-control" [(ngModel)]="merchant.username" #userName="ngModel"
                 placeholder="Enter Merchant UserName" required autocomplete="off"
@@ -30,7 +30,7 @@
             
         </div>
         <div class="form-group">
-            <label for="inputname">Enter Name</label>
+            <label for="inputname" style="font-size: large;">Enter Name</label>
             <input type="text" maxlength="20" pattern="[a-zA-Z]*" id="name" name="name"
                 class="form-control" [(ngModel)]="merchant.name" #name="ngModel"
                 placeholder="Enter Merchant Name" required autocomplete="off"
@@ -44,7 +44,7 @@
             </small>
         </div>
         <div class="form-group">
-            <label for="inputname">Enter Phone number</label>
+            <label for="inputname" style="font-size: large;">Enter Phone number</label>
             <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="phoneno" name="phoneno"
                 class="form-control" [(ngModel)]="merchant.phoneNumber" #phone="ngModel"
                 placeholder="Enter Mobile number" required autocomplete="off"
@@ -58,7 +58,7 @@
                 </small>
             </div>
             <div class="form-group">
-                <label for="inputname">Enter Alternate Phone number</label>
+                <label for="inputname" style="font-size: large;">Enter Alternate Phone number</label>
                 <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="altphoneno" name="altphoneno"
                     class="form-control" [(ngModel)]="merchant.alternatePhoneNumber" #altphone="ngModel"
                     placeholder="Enter Mobile number" required autocomplete="off"
@@ -73,9 +73,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="userName">Enter Email</label>
+                    <label for="userName" style="font-size: large;">Enter Email</label>
                     <input type="email" maxlength="20" id="emailid" name="emailid"
-                        class="form-control" [(ngModel)]="merchant.alternateEmail" #emailid="ngModel"
+                        class="form-control" [(ngModel)]="merchant.eMail" #emailid="ngModel"
                         placeholder="Enter Merchant Email" required autocomplete="off"
                         aria-describedby="merchantemailHelp">
                     <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -83,8 +83,19 @@
                       Email is required</small>
                     
                 </div>
+                <div class="form-group">
+                    <label for="userName" style="font-size: large;">Enter Alternate Email</label>
+                    <input type="email" maxlength="20" id="altemailid" name="emailid"
+                        class="form-control" [(ngModel)]="merchant.alternateEmail" #altemailid="ngModel"
+                        placeholder="Enter Merchant Alternate Email" required autocomplete="off"
+                        aria-describedby="merchantemailHelp">
+                    <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
+                        *ngIf="altemailid.touched && altemailid.invalid && !altemailid.errors?.pattern">
+                      Email is required</small>
+                    
+                </div>
                 <div class= "form-group">
-                    <label for="inputpassword"> Enter Password</label>
+                    <label for="inputpassword" style="font-size: large;"> Enter Password</label>
                     <input type="password" maxlength="20" pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{8,20})"
                         id="password" name="password" [(ngModel)]="merchant.password" #passwordcontrol="ngModel" 
                         autocomplete="off" required class="form-control" placeholder="Enter Merchant Password"
@@ -100,18 +111,18 @@
                 </div>
                 <div class="form-group">
                     <div>
-                   <label style="font-size: large;">Rating</label></div>
+                   <label style="font-size: x-large;">Rating</label></div>
                     <div class="rate">
                     <input type="radio" id="star5" name="rating" value=5  [(ngModel)]="merchant.rating" #ratingcontrol="ngModel" required />
-                    <label for="star5" title="text" style="font-size: medium;">5 stars</label>
+                    <label for="star5" title="text" style="font-size: large;">5 stars</label>
                     <input type="radio" id="star4" name="rating" value="4" [(ngModel)]="merchant.rating" #ratingcontrol="ngModel" />
-                    <label for="star4" title="text" style="font-size: medium;">4 stars</label>
+                    <label for="star4" title="text" style="font-size: large;">4 stars</label>
                     <input type="radio" id="star3" name="rating" value="3" [(ngModel)]="merchant.rating" #ratingcontrol="ngModel" />
-                    <label for="star3" title="text" style="font-size: medium;">3 stars</label>
+                    <label for="star3" title="text" style="font-size: large;">3 stars</label>
                     <input type="radio" id="star2" name="rating" value="2" [(ngModel)]="merchant.rating" #ratingcontrol="ngModel" />
-                    <label for="star2" title="text" style="font-size: medium;">2 stars</label>
+                    <label for="star2" title="text" style="font-size: large;">2 stars</label>
                     <input type="radio" id="star1" name="rating" value="1"  [(ngModel)]="merchant.rating" #ratingcontrol="ngModel" />
-                    <label for="star1" title="text" style="font-size: medium;">1 star</label>
+                    <label for="star1" title="text" style="font-size: large;">1 star</label>
                 </div>
 
                 <div *ngIf="ratingcontrol.touched && ratingcontrol.invalid">
