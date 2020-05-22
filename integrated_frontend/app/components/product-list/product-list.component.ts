@@ -30,13 +30,30 @@ export class ProductListComponent implements OnInit {
     );
     
   }
+
+  // featured(){
+  //   this.adminService.getFeaturedProducts().subscribe(
+  //     data=>{
+  //       this.products = data;
+  //     },
+  //     error=>{
+  //       console.log(error);
+  //     }
+  //   )
+  // }
+
   deleteProduct(productId:number)
   {
     this.adminService.deleteProduct(productId);
-    alert("Delete");
+    alert("Deleted");
   }
+
+  update(){
+    this.router.navigate(['/updateProduct']);
+  }
+
   back()
   {
-      this.router.navigate(['admin']);
+      this.router.navigate(['/admin']);
   }
 }
