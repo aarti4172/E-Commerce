@@ -14,6 +14,6 @@ email;
   }
 invite()
 {
-
+ this.adminService.inviteservice(this.email);
 }
 }
