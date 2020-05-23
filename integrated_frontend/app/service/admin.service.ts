@@ -8,9 +8,6 @@ import { Product } from '../models/Product';
   providedIn: 'root'
 })
 export class AdminService {
-  addNewMerchant(merchant: import("../models/MerchantDetails").MerchantDetails) {
-    throw new Error("Method not implemented.");
-  }
   
 
   baseUrl="http://localhost:9091/capstore/admin";
@@ -40,6 +37,13 @@ export class AdminService {
   getMerchant(id){
     return this.http.get(this.baseUrl+"/AllMerchants/"+id);
   }
+  addNewMerchant(merchant) {
+      let options = {   method: "POST",
+    body: JSON.stringify(merchant),
+    headers: { "Content-Type": "application/json" } };
+                return fetch(this.baseUrl+"/newMerchant",options);
+  }
+  
   deleteMerchant(merchant_ID:number)
   {
     return this.http.delete(`${this.baseUrl}/merchant/${merchant_ID}`).pipe(catchError(this.handleError));
@@ -53,6 +57,10 @@ export class AdminService {
     return fetch(this.baseUrl + "/updateMerchant", options);
   //return this.http.post(this.baseUrl+"/update",merchant);
   }
+   inviteservice(email){
+    return this.http.get(this.baseUrl+"/invite/"+email);
+  }
+
   //------------------------------------------------Product------------------------------------------------------------------------------------------------
   
   getAllProducts():Observable<any>
@@ -108,7 +116,9 @@ export class AdminService {
   
   
   //------------------------------------------------Discount----------------------------------------------------------------------------------------------
- 
+ addDiscount(id,discount){
+    return this.http.post(this.baseUrl+"/addDisount/"+id+"/",discount);
+  }
    
   
   //------------------------------------------------Error Handling--------------------------------------------------------
