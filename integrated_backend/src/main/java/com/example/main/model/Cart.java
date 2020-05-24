@@ -1,8 +1,15 @@
-package com.example.main.model;
+package com.example.main.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,21 +17,30 @@ import javax.persistence.Table;
 public class Cart {
 
 	@Id
+	@GeneratedValue
 	@Column(name = "cart_id")
     private int cartId;   //(Primary Key)
-	@Column(name = "user_id")
-	private int userID;  //(references cust_id)
 	@Column(name = "type")
     private String type;  //(“Wishlist”,”cart”)
-	@Column(name = "product_id")
-	private int productId;
+	
 	@Column(name = "product_quantity")
 	private int quantity;
+	
+	@Column(name="product_id")
+	private int productId;
+	
+	
 	
 	public int getProductId() {
 		return productId;
 	}
 	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public Cart(String type, int quantity, int productId) {
+		//super();
+		this.type = type;
+		this.quantity = quantity;
 		this.productId = productId;
 	}
 	public int getQuantity() {
@@ -33,12 +49,7 @@ public class Cart {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getUserID() {
-		return userID;
-	}
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
+	
 	public int getCartId() {
 		return cartId;
 	}

@@ -1,4 +1,4 @@
-package com.example.main.model;
+package com.example.main.models;
 
 import javax.persistence.*;
 
@@ -74,7 +74,5 @@ public class UserAddress {
 	}
 	public UserAddress() {
 	}
-    
-    
     
 }

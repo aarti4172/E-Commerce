@@ -1,4 +1,4 @@
-package com.example.main.model;
+package com.example.main.models;
 
 import java.sql.Date;
 import javax.persistence.Column;

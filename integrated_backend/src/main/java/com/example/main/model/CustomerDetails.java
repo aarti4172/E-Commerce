@@ -1,4 +1,4 @@
-package com.example.main.model;
+package com.example.main.models;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -9,11 +9,6 @@ import javax.persistence.*;
 @Table(name = "customer_details")
 public class CustomerDetails extends User implements Serializable{
 	
-    
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "phone_number")
