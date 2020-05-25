@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Coupon } from '../models/Coupon';
 import { Product } from '../models/Product';
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,8 @@ import { Product } from '../models/Product';
 export class AdminService {
   
 
-  baseUrl="http://localhost:9091/capstore/admin";
-  baseUrlMerchant="http://localhost:9091/admin/merchant";
+  baseUrl="http://localhost:9090/capstore/admin";
+ // baseUrlMerchant="http://localhost:9091/admin/merchant";
  // baseUrl ='http://localhost:8080/Capstore/admin';
 
   constructor(private http:HttpClient) { }
@@ -67,15 +66,7 @@ export class AdminService {
   {
     return this.http.get(`${this.baseUrl}`+"/getAllProducts").pipe(catchError(this.handleError));
   }
- /* deleteProduct(productID:number):Observable<any>
-  {
-    return this.http.delete(`${this.baseUrlProduct}/products/${productID}`);
-  }*/
-  //Product Section
-  /*getAllProducts(): Observable<Object>{
-    return this.http.get<Product[]>(`${this.baseUrl}/getAllProducts`);
-  }*/
-
+ 
   addProduct(product: Object): Observable<Object>{
     return this.http.post<number>(`${this.baseUrl}/addProduct`, product);
   }
