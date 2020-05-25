@@ -32,7 +32,8 @@ export class AddProductComponent implements OnInit {
       category:['',Validators.required],
       activated:['',Validators.required],
       status:['',Validators.required],
-      featured:['',Validators.required]
+      featured:['',Validators.required],
+      user_id:['',Validators.required]
     });
   }
   
