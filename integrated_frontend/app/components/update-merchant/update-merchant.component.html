@@ -1,5 +1,3 @@
-
-
 <div>
     <form #idform="ngForm" (ngsubmit)="getMerchant()">
     <input type="number" name="user" [(ngModel)]="userid" id="user">
@@ -42,7 +40,7 @@
     <div class="form-group">
         <label for="inputname">Enter Phone number</label>
         <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="phoneno" name="phoneno"
-            class="form-control" [(ngModel)]="merchant.phoneNumber" #phone="ngModel"
+            class="form-control" [(ngModel)]="merchant.phone_number" #phone="ngModel"
             placeholder="Enter Mobile number" required autocomplete="off"
             aria-describedby="mobileHelp">
             <small id="mobileHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -56,7 +54,7 @@
         <div class="form-group">
             <label for="inputname">Enter Alternate Phone number</label>
             <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="altphoneno" name="altphoneno"
-                class="form-control" [(ngModel)]="merchant.alternatePhoneNumber" #altphone="ngModel"
+                class="form-control" [(ngModel)]="merchant.alternate_phone_number" #altphone="ngModel"
                 placeholder="Enter Mobile number" required autocomplete="off"
                 aria-describedby="mobileHelp">
                 <small id="mobileHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -71,7 +69,7 @@
             <div class="form-group">
                 <label for="userName">Enter Email</label>
                 <input type="email" maxlength="20" id="emailid" name="emailid"
-                    class="form-control" [(ngModel)]="merchant.alternateEmail" #emailid="ngModel"
+                    class="form-control" [(ngModel)]="merchant.alternate_email" #emailid="ngModel"
                     placeholder="Enter Merchant Email" required autocomplete="off"
                     aria-describedby="merchantemailHelp">
                 <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
