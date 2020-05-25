@@ -46,7 +46,7 @@
         <div class="form-group">
             <label for="inputname" style="font-size: large;">Enter Phone number</label>
             <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="phoneno" name="phoneno"
-                class="form-control" [(ngModel)]="merchant.phoneNumber" #phone="ngModel"
+                class="form-control" [(ngModel)]="merchant.phone_number" #phone="ngModel"
                 placeholder="Enter Mobile number" required autocomplete="off"
                 aria-describedby="mobileHelp">
                 <small id="mobileHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -60,7 +60,7 @@
             <div class="form-group">
                 <label for="inputname" style="font-size: large;">Enter Alternate Phone number</label>
                 <input type="text" maxlength="20" pattern="[1-9][0-9]{9}" id="altphoneno" name="altphoneno"
-                    class="form-control" [(ngModel)]="merchant.alternatePhoneNumber" #altphone="ngModel"
+                    class="form-control" [(ngModel)]="merchant.alternate_phone_number" #altphone="ngModel"
                     placeholder="Enter Mobile number" required autocomplete="off"
                     aria-describedby="mobileHelp">
                     <small id="mobileHelp" class="form-text text-muted alert alert-danger" role="alert"
@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <label for="userName" style="font-size: large;">Enter Alternate Email</label>
                     <input type="email" maxlength="20" id="altemailid" name="emailid"
-                        class="form-control" [(ngModel)]="merchant.alternateEmail" #altemailid="ngModel"
+                        class="form-control" [(ngModel)]="merchant.alternate_email" #altemailid="ngModel"
                         placeholder="Enter Merchant Alternate Email" required autocomplete="off"
                         aria-describedby="merchantemailHelp">
                     <small id="merchantNameHelp" class="form-text text-muted alert alert-danger" role="alert"
