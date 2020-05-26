@@ -74,8 +74,20 @@
           <label for="rating"><b>Product Rating:</b></label>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-7">
-          <input type="number" min=1 max=5 class="form-control" placeholder="Enter Product Rating" 
-          formControlName="rating" [(ngModel)]="product.productRating">
+          <!-- <input type="number" min=1 max=5 class="form-control" placeholder="Enter Product Rating" 
+          formControlName="rating" [(ngModel)]="product.productRating"> -->
+          <div class="rate">
+            <input type="radio" id="star5" name="rating" value=5  [(ngModel)]="product.productRating" class="form-control" formControlName="rating"/>
+            <label for="star5" title="text">5 stars</label>
+            <input type="radio" id="star4" name="rating" value="4" [(ngModel)]="product.productRating" class="form-control" formControlName="rating"/>
+            <label for="star4" title="text">4 stars</label>
+            <input type="radio" id="star3" name="rating" value="3" [(ngModel)]="product.productRating" class="form-control" formControlName="rating"/>
+            <label for="star3" title="text">3 stars</label>
+            <input type="radio" id="star2" name="rating" value="2" [(ngModel)]="product.productRating" class="form-control" formControlName="rating"/>
+            <label for="star2" title="text">2 stars</label>
+            <input type="radio" id="star1" name="rating" value="1" [(ngModel)]="product.productRating" class="form-control" formControlName="rating"/>
+            <label for="star1" title="text">1 star</label>
+        </div>
          <!-- <div *ngIf="submitted && productForm.controls.rating.errors" class="error">
             <div class="text-danger" *ngIf="productForm.controls.rating.errors.required">
               <font color="red">Product Rating is required</font>

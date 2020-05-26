@@ -7,10 +7,12 @@ export class Product{
 	noOfProductViewed:number;
 	productBrand:String;
 	noOfProducts:number;
-	productInfo:String;
+    	productInfo:String;
     	discount:number;
     	productCategory:String;
-    	productActivated: Boolean;
+    	productActivated: boolean;
     	status:boolean;
     	featured:boolean;
+    	user_id: number;
+    
 }
