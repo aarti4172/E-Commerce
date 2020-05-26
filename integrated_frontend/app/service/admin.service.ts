@@ -89,22 +89,22 @@ export class AdminService {
 
   //------------------------------------------------Promocode----------------------------------------------------------------------------------------------
   
-  addPromocode(Coupon:Object) :Observable<Object>
+ 
+ addPromocode(Coupon:Object) :Observable<Object>
     {
 
-         return this.http.post(`${this.baseUrl}`,Coupon).pipe(catchError(this.handleError));
+         return this.http.post(`${this.baseUrl}/addCoupon`,Coupon).pipe(catchError(this.handleError));
     }
 
   getPromocodes():Observable<any>
     {
-          return this.http.get(`${this.baseUrl}`);
+          return this.http.get(`${this.baseUrl}/getAllCoupons`);
     }
 
   deletePromocode(promocodeId:number)
     {
-     return this.http.delete(`${this.baseUrl}/${promocodeId}`);
+     return this.http.delete(`${this.baseUrl}/removeCoupon/${promocodeId}`);
    }
-  
   
   //------------------------------------------------Discount----------------------------------------------------------------------------------------------
  addDiscount(id,discount){
