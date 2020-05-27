@@ -4,10 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
-
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,8 @@ import com.example.main.service.EmailService;
 @RequestMapping(value="/capstore/admin",method= {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
 public class AdminController {
 
-			
+	org.slf4j.Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
 		@Autowired
 		private AdminService adminService;
 		
@@ -59,6 +61,7 @@ public class AdminController {
 		@GetMapping("/getAllCustomers")
 		public ResponseEntity<List<CustomerDetails>> getAllCustomers()
 		   {
+			logger.trace("Get all customers working...");
 				List<CustomerDetails> customers= adminService.getAllCustomers();
 				System.out.println("In Get All Customers");
 				System.out.println(customers);
@@ -71,6 +74,7 @@ public class AdminController {
 		  
 		@DeleteMapping("/deleteCustomer/{userId}")//Not working --->delete cascaded ones first
 		public  String deleteCustomer(@PathVariable("userId")int userId) {
+			logger.trace("Delete Customer working...");
 			 adminService.removeCustomerById(userId);
 			 return "Account removed successfully!";
 			}
@@ -83,7 +87,7 @@ public class AdminController {
 		 
 		 @PostMapping(value = "/addMerchant")
 			public ResponseEntity<MerchantDetails> createMerchant(@Valid @RequestBody MerchantDetails merchant) throws MailException, MessagingException, UnsupportedEncodingException, UserAlreadyExistsException {
-			    
+			 logger.trace("Create Merchant working...");
 				emailService.sendNotificationToMerchant(merchant);
 				return new ResponseEntity<MerchantDetails>(HttpStatus.CREATED);
 				   
@@ -91,12 +95,14 @@ public class AdminController {
 		 
 		 @GetMapping("/verifyMerchant/{merchant}")//Not checked
 			public ResponseEntity<MerchantDetails>verifyMerchantDetails(@PathVariable("merchant") String email){
+			 logger.trace("Verify Merchant Details working...");
 				return new ResponseEntity<MerchantDetails>(adminService.verifyMerchantDetails(email),HttpStatus.OK);
 			}
 		 
 		 @PutMapping("/approveMerchant/{email}/{approved}")//Not checked
 			public ResponseEntity<MerchantDetails> getApproval(@PathVariable("email") String email, @PathVariable("approved") boolean approved){
-				MerchantDetails merchant = adminService.getApproval(email, approved);
+			 logger.trace("Get approval from admin working...");
+			 	MerchantDetails merchant = adminService.getApproval(email, approved);
 				if(merchant==null) {
 					return new ResponseEntity("Sorry! Merchant not found!",HttpStatus.NOT_FOUND);
 				}
@@ -106,6 +112,7 @@ public class AdminController {
 
 		@GetMapping(value = "/findMerchantById/{userId}")
 		public MerchantDetails getMerchant(@PathVariable("userId")Integer userId) {
+			logger.trace("Get Merchant by Id working...");
 			return adminService.findMerchantById(userId);
 			
 		}
@@ -113,6 +120,7 @@ public class AdminController {
 		
 		 @GetMapping("/getAllMerchants")
 		 public ResponseEntity<List<MerchantDetails>> getAllMerchants(){
+			 logger.trace("Get all Merchants working...");
 			List<MerchantDetails> merchants= adminService.getAllMerchant();
 				if(merchants.isEmpty()) {
 				return new ResponseEntity("Sorry! No Merchant Found!", HttpStatus.NOT_FOUND);
@@ -123,6 +131,7 @@ public class AdminController {
 		 
 		@DeleteMapping("/deleteMerchant/{merchantId}")
 		public  Map<String, Boolean> deleteMerchant(@PathVariable("merchantId")int merchantId) {
+			logger.trace("Delete Merchant working...");
 			 adminService.removeMerchantById(merchantId);
 			 Map<String, Boolean> response = new HashMap<>();
 			 response.put("deleted", Boolean.TRUE);
@@ -131,19 +140,16 @@ public class AdminController {
 		
 		
 		@RequestMapping(value ="/inviteUsers",method = { RequestMethod.GET,RequestMethod.POST })
-		public void invite(User user){//Not written 
+		public void invite(User user){//Not written
+			logger.trace("Invite Users working...");
 		     emailService.sendInvitationsToUsers(user);	
 		}
 		
 		@PutMapping(value="/updateMerchant")
 		public boolean update(@RequestBody MerchantDetails merchant) {
+			logger.trace("Update Merchant working...");
 		     return adminService.updateMerchant(merchant);
 		}
-		
-		
-		
-		
-		
 		
 			
 		//Product: 
@@ -151,11 +157,13 @@ public class AdminController {
 		 @DeleteMapping("deleteProduct/{productID}")
 		 public boolean DeleteProduct(@PathVariable("productID")int productID)
 		 {
+			 logger.trace("Delete Product working...");
 			 return adminService.removeProduct(productID);
 		 }
 		
 		@PostMapping("/addProduct")
 		public Product addProduct(@RequestBody Product product) {
+			logger.trace("Add Product working...");
 			product.setProductId((int)(Math.random()*100000));
 			product.setDiscount(0);
 			return adminService.addProduct(product);
@@ -163,37 +171,41 @@ public class AdminController {
 		
 		@GetMapping("/getAllProducts")
 		List<Product> getAllProducts(){
+			logger.trace("Get All Products working...");
 			return adminService.getAllProducts();
 		}
 		
 		@GetMapping("/getProductById/{productId}")
 		Product getProductByProductId(@PathVariable int productId) {
+			logger.trace("Get Product by Id working...");
 			return adminService.getProductByProductId(productId);
 		}
 		
 		@PutMapping("/updateProduct")
 		boolean update(@RequestBody Product product) {
+			logger.trace("Update Product working...");
 			return adminService.update(product);
 		}
 		
 		@PutMapping("/updateCategoryByCategory")
 		boolean updateCategoryByCategory(@RequestParam("productCategory")String productCategory, @RequestParam("updatedCategory")String updatedCategory) {
+			logger.trace("Update Category working...");
 			return adminService.updateCategoryByCategory(productCategory, updatedCategory);
 		}
-		
-		
-		
 		
 			
 	
 		//Coupon
+		
 		@GetMapping("/getAllCoupons")
 		public ResponseEntity<List<Coupon>>getAllAccounts(){
+			logger.trace("Get All Coupons working...");
 			return new ResponseEntity<List<Coupon>>(adminService.getCoupons(),HttpStatus.OK);
 		}
 		
 		@PutMapping("/findCouponById/{couponId}")
 		public ResponseEntity<Coupon> getAccountById(@PathVariable("couponId") int couponId) throws Exception{
+			logger.trace("Get Coupon by Id working...");
 			Coupon account= adminService.getCouponById(couponId).get();
 			if(account==null) {
 				return new ResponseEntity("Sorry! Coupon not found!",HttpStatus.NOT_FOUND);
@@ -204,6 +216,7 @@ public class AdminController {
 		
 		@PutMapping("/findAccountByCouponCode/{couponCode}")
 		public ResponseEntity<Coupon> getAccount(@PathVariable("couponCode") String couponCode){
+			logger.trace("Get Coupon by Coupon Code working...");
 			Coupon account= adminService.getCouponByCode(couponCode);
 			if(account==null) {
 				return new ResponseEntity("Sorry! Coupon not found!",HttpStatus.NOT_FOUND);
@@ -214,7 +227,7 @@ public class AdminController {
 		
 		@PostMapping(value = "/addCoupon")
 		public ResponseEntity<Coupon> addCoupon(@Valid @RequestBody Coupon coupon) {
-		
+			logger.trace("Add Coupon working...");
 			adminService.addCoupon(coupon);
 			return new ResponseEntity<Coupon>(HttpStatus.CREATED);
 			   
@@ -227,33 +240,38 @@ public class AdminController {
 		
 		@PutMapping(value="/forwardRequestToMerchant/{feedbackId}")
 		public int forwardRequestToMerchant(@PathVariable int feedbackId) {
+			logger.trace("Request forward to Merchant working...");
 			return adminService.forwardRequestToMerchant(feedbackId);
 		}
 		
 		@GetMapping(value="/forwardResponseToCustomer/{feedbackId}")
 		public String forwardResponseToCustomer(@PathVariable int feedbackId) {
+			logger.trace("Request forward to Customer working...");
 			return adminService.forwardResponseToCustomer(feedbackId);
 		}
 		
 		@GetMapping(value="/getAllCommonFeedbackByUserId/{userId}")
 		public List<CommonFeedback> getAllCommonFeedbackByUserId(@PathVariable("userId") int userId) {
+			logger.trace("Get all common feedback by user Id working...");
 			return adminService.getAllCommonFeedbackByUserId(userId);
 		}
 		
 		@GetMapping(value="/getCommonFeedbackById/{feedbackId}")
 		public CommonFeedback getCommonFeedbackById(@PathVariable("feedbackId") int feedbackId) {
+			logger.trace("Get Common Feedback by Id working...");
 			return adminService.getCommonFeedbackById(feedbackId);
 		}
 		
 		@GetMapping(value="/getAllCommonFeedbackByProductId/{productId}")
 		public List<CommonFeedback> getAllCommonFeedbackByProductId(@PathVariable("productId") int productId) {
+			logger.trace("Get All Common Feedback By Product Id working...");
 			return adminService.getAllCommonFeedbackByProductId(productId);
 		}
 		
 		@GetMapping(value="/getAllCommonFeedback")
 		public List<CommonFeedback> getAll() {
+			logger.trace("Get All Common Feedback working...");
 			return adminService.getAll();
 		}
 		
-		 
 	}
