@@ -21,7 +21,7 @@
         
                 </tr>
               </thead>
-                <tr *ngFor="let cfd of cfdList |filterCfd:searchTerm">
+                <tr *ngFor="let cfd of cfdList |FilterCustomerPipe:searchTerm">
                     <td>{{cfd.feedbackId}}</td>
                     <td>{{cfd.productId}}</td>
                     <td>{{cfd.userId}}</td>
