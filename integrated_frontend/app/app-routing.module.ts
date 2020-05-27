@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'addProducts',component:AddProductComponent},
   {path:'productList', component:ProductListComponent},
   {path:'admin',component:AdminComponent},
-  {path:'addDiscount',component:AddDiscountComponent},
+  {path:'addDiscount/:productID',component:AddDiscountComponent},
   {path:'addPromocode',component:AddPromocodeComponent},
   {path:'addMerchant',component:AddMerchantComponent},
   {path:'showCustomer',component:CustomerListComponent},

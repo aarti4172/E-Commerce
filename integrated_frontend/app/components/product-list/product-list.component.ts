@@ -11,6 +11,8 @@ import { AdminService } from 'src/app/service/admin.service';
 export class ProductListComponent implements OnInit {
 
   products:Product[]=[];
+  product;
+ // productId;
   searchTerm;
   location:String;
   constructor(private router:Router,
@@ -30,41 +32,28 @@ export class ProductListComponent implements OnInit {
     );
     
   }
-
-  // featured(){
-  //   this.adminService.getFeaturedProducts().subscribe(
-  //     data=>{
-  //       this.products = data;
-  //     },
-  //     error=>{
-  //       console.log(error);
-  //     }
-  //   )
-  // }
-
   deleteProduct(productId:number)
-  { if(confirm("Are you sure you want to remove the product?")){
-    this.adminService.removeProduct(productId).subscribe(data => {
+  {
+    this.adminService.removeProduct(productId).subscribe(data=>{
+     
       console.log(data);
-      this.msg=data;
-      if(this.msg==true)
-      {
-        this.message="Successfully removed the product";
-        alert(this.message);
-        this.listOfProducts();
-      }
-    }, err =>
-    { console.log(err.stack);
-    })
-  }
-  }
 
-  update(){
-    this.router.navigate(['/updateProduct']);
+    },
+    error=>{
+      console.log(error);
+    });
+    window.location.reload();
+   
   }
-
+ 
+  addDiscount1(productId:number)
+  {
+   
+this.router.navigate(['addDiscount',productId]);
+//alert(productId);
+  }
   back()
   {
-      this.router.navigate(['/admin']);
+      this.router.navigate(['admin']);
   }
 }

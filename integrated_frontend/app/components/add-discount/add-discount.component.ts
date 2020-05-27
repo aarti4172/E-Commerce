@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/Product';
-
+import { Route } from '@angular/compiler/src/core';
+import { AdminService } from 'src/app/service/admin.service';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-add-discount',
   templateUrl: './add-discount.component.html',
@@ -9,11 +11,24 @@ import { Product } from 'src/app/models/Product';
 })
 export class AddDiscountComponent implements OnInit {
 
-  product:Product;
-  constructor(private router:Router) { }
+
+ 
+  productId:number;
+  discount:number;
+  check:any;
+  message:any;
+  submitted:boolean=false;
+  discountForm:FormGroup;
+  constructor(private router:Router,private adminService:AdminService,
+    private route:ActivatedRoute,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.product=new Product();
+    
+    this.discountForm=this.formBuilder.group({
+      productId:['',Validators.required],
+      discount:['',Validators.required]
+    });
+   
   }
   back()
   {
@@ -22,5 +37,34 @@ export class AddDiscountComponent implements OnInit {
   onSubmit()
   {
     
+     this.submitted=true;
+      this.productId=this.discountForm.controls.productId.value;
+      this.discount=this.discountForm.controls.discount.value;
+     // alert(this.productId);
+      //alert(this.discount);
+      if(this.discount>=0)
+      {
+
+      
+    this.adminService.addDiscount(this.discount,this.productId).subscribe(
+      data=>{
+        console.log(data);
+        this.check=data;
+        if(this.check==true)
+        {
+          alert("Discount Added succesfully");
+        }
+        this.router.navigate(['showDiscount']);
+      },
+       error=>{
+        console.log(error);
+      }
+    );
+      }
+      else{
+        alert("Enter Valid Number");
+      }
   }
+
+  
 }

@@ -107,10 +107,10 @@ export class AdminService {
    }
   
   //------------------------------------------------Discount----------------------------------------------------------------------------------------------
- addDiscount(id,discount){
-    return this.http.post(this.baseUrl+"/addDisount/"+id+"/",discount);
+  addDiscount( discount:number,productID:number): Observable<any> {
+    
+    return this.http.put(`${this.baseUrl}/addDiscount/${discount}/${productID}`,discount);
   }
-   
   
   //------------------------------------------------Error Handling--------------------------------------------------------
   handleError(error) {

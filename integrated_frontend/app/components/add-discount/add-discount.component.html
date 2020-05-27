@@ -2,23 +2,28 @@
 
 <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: center;"> ADD DISCOUNT</h1>
 <div style="width: 400px;align-content: center;"  class="container">
-<form  #discountForm=ngForm >
+<form   name="discountform" id="discountform" [formGroup]="discountForm"  (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label>Product Brand :</label>
-    <input required type="test" class="form-control" #brand="ngModel" name="brand" placeholder="Enter Brand of the Product "  id="brand" required [(ngModel)]="product.productBrand">
-    <small class="text-danger" [class.d-none]="discount.valid||discount.untouched">Please Enter Brand of Product</small>
+    <label>Product ID :</label>
+    <input required type="number"  class="form-control" formControlName="productId" placeholder="Enter ID of the Product "   >
+    <div *ngIf="submitted && discountForm.controls.productId.errors" class="error">
+      <div class="text-danger" *ngIf="discountForm.controls.productId.errors.required">
+          <font color="red">Product Id is required</font>
+      </div>
   </div>
+  </div>
+  
     <div class="form-group">
         <label>Discount :</label>
-        <input required type="number" class="form-control" #discount="ngModel" name="discount" placeholder="Enter Discount in number only (without %)"  id="discount" required [(ngModel)]="product.discount">
-        <small class="text-danger" [class.d-none]="discount.valid||discount.untouched">Please Enter Discount</small>
+        <input required type="number" min=0 class="form-control" formControlName="discount" placeholder="Enter Discount in number only (without %)"   >
+        <div *ngIf="submitted && discountForm.controls.discount.errors" class="error">
+          <div class="text-danger" *ngIf="discountForm.controls.discount.errors.required">
+              <font color="red">Discount  is required</font>
+          </div>
+      </div>
       </div>
     <button (click)="back()"  class="btn btn-secondary" style="margin-left: 10px">Back</button>
-    <button type="submit" (click)="onSubmit()" [disabled]="discountForm.form.invalid"  style="margin-left: 10px" class="btn btn-secondary"  novalidate>Submit</button>
-</form>
+    <input type="submit" value="Submit" class="btn btn-secondary" />
+  </form>
 </div>
-
-
-
-
-
+  

@@ -46,7 +46,8 @@ public class AdminController {
 		@Autowired
 		private EmailService emailService;
 		
-		
+		@Autowired
+		private ProductRepository productRepository;
 		@RequestMapping(value="/hello")
 		public String sayHello() {
 			return "Hello World! from Capstore Spring Framework!";
@@ -220,7 +221,16 @@ public class AdminController {
 			   
 		}
 	
-	
+	//
+	@PutMapping("/addDiscount/{discount}/{productID}")
+		public ResponseEntity<Boolean> addDiscount(@PathVariable("discount") int discount,@PathVariable("productID") int productID)
+		{
+			Product product=productRepository.findById(productID).get();
+			product.setDiscount(discount);
+			productRepository.save(product);
+			return ResponseEntity.ok().body(true);
+			
+		}
 	
 	
 	//Common Feedback:

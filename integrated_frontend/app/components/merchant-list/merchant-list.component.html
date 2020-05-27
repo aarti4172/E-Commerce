@@ -17,7 +17,7 @@
 
         </tr>
       </thead>
-        <tr *ngFor="let m of merchantList |filterMerchant:searchTerm">
+        <tr *ngFor="let m of merchantList |filter:searchTerm">
             <td>{{m.userId}}</td>
             <td>{{m.name}}</td>
             <td>{{m.eMail}}</td>

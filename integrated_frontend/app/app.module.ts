@@ -13,8 +13,6 @@ import { AddPromocodeComponent } from './components/add-promocode/add-promocode.
 import { ShowDiscountComponent } from './components/show-discount/show-discount.component';
 import { ShowPromocodeComponent } from './components/show-promocode/show-promocode.component';
 import { FilterCustomerPipe } from './pipe/filter-customer.pipe';
-import { FilterMerchantPipe } from './pipe/filter-merchant.pipe';
-import { FilterProductPipe } from './pipe/filter-product.pipe';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { CommonFeedbackComponent } from './components/common-feedback/common-feedback.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
@@ -41,8 +39,6 @@ import { UpdateProductComponent } from './components/update-product/update-produ
     ShowDiscountComponent,
     ShowPromocodeComponent,
     FilterCustomerPipe,
-    FilterMerchantPipe,
-    FilterProductPipe,
     ProductListComponent,
     CommonFeedbackComponent,
     AddProductComponent,

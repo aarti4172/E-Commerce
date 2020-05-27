@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/models/Product';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-show-discount',
@@ -7,10 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./show-discount.component.css']
 })
 export class ShowDiscountComponent implements OnInit {
+  searchTerm;
+  product:Product;
+  constructor(private router:Router,private adminService:AdminService) { }
 
-  constructor(private router:Router) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.adminService.getAllProducts().subscribe(data=>{this.product=data},error=>{console.log(error)});
   }
   back()
   {

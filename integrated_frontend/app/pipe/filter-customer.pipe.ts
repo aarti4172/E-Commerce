@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { CustomerDetails } from '../models/CustomerDetails';
 
 @Pipe({
-  name: 'filterCustomer'
+  name: 'filter'
 })
 export class FilterCustomerPipe implements PipeTransform {
 
