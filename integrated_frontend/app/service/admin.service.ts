@@ -112,6 +112,21 @@ export class AdminService {
     return this.http.put(`${this.baseUrl}/addDiscount/${discount}/${productID}`,discount);
   }
   
+  //------------------------------------------------CommonFeedback-----------------------------------------------------------------------
+  forwardRequestToMerchant(feedbackId: number):Observable<number>{
+    return this.http.get<number>(`${this.baseUrl}/forwardRequestToMerchant/${feedbackId}`);
+  }
+
+
+  forwardResponseToCustomer(feedbackId:number):Observable<string>{
+    return this.http.get<string>(`${this.baseUrl}/forwardResponseToCustomer/${feedbackId}`);
+
+  }
+
+  getAllCommonFeedback(){
+    return this.http.get<CommonFeedback[]>(`${this.baseUrl}/getAllCommonFeedback`);
+  }
+   
   //------------------------------------------------Error Handling--------------------------------------------------------
   handleError(error) {
     let errorMessage='';
