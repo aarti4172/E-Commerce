@@ -194,29 +194,6 @@ public class AdminDaoImpl implements AdminDao{
 		return true;
 	}
 
-// 	@Override
-// 	public boolean updateCategoryById(int productId, String updatedCategory) {
-// 		Product p = productRepository.findById(productId).get();
-// 		p.setProductCategory(updatedCategory);
-// 		productRepository.save(p);
-// 		return true;
-// 	}
-
-	@Override
-	public List<Product> getFeaturedProducts() {
-		List<Product> products= getAllProducts();
-		Iterator<Product> i = products.iterator();
-		while(i.hasNext()) {
-			Product pr= (Product)i.next();
-			if(pr.isFeatured()==false) {
-				i.remove();
-			}
-		}
-		return products;
-	}
-
-	
-	
 	
 	
 		
@@ -285,12 +262,14 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public int forwardRequestToMerchant(int feedbackId) {
+		logger.trace("Request to Merchant working...");
 		int merchantId = 0;
 		CommonFeedback cfd =  getCommonFeedbackById(feedbackId);
 		if(cfd.isRequestFlag()== true) {
 			cfd.setRequestApproved(true);
-			Product product= productRepository.findByProductId(cfd.getProductId());
-			merchantId = product.getProductMerchantId();
+			//Product product= productRepository.findByProductId(cfd.getProductId());
+			merchantId = productRepository.findMerchantId(cfd.getProductId());
+			//merchantId = product.getProductMerchantId();
 		}
 		return merchantId;
 	}
