@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/Product';
-import { AdminService } from 'src/app/service/admin.service';
+import { Product } from 'src/app/Model/Product.model';
+import { CapstoreService } from 'src/app/service/capstore.service';
 
 @Component({
   selector: 'app-show-discount',
@@ -11,7 +11,7 @@ import { AdminService } from 'src/app/service/admin.service';
 export class ShowDiscountComponent implements OnInit {
   searchTerm;
   product:Product;
-  constructor(private router:Router,private adminService:AdminService) { }
+  constructor(private router:Router,private adminService:CapstoreService) { }
 
   ngOnInit() {
     this.adminService.getAllProducts().subscribe(data=>{this.product=data},error=>{console.log(error)});
